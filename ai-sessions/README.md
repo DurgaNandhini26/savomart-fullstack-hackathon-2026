@@ -2,7 +2,7 @@
 
 This project was built with **Claude Code** (Anthropic) running in the Claude desktop app.
 
-* `claude-code-session-*.md` — exported transcript(s) of the build session(s): the prompts, the agent's reasoning summaries, every tool call (shell commands, file edits, browser checks) and their results.
+* `claude-code-session-*.zip` — exported Claude Code session(s) (`transcript.jsonl` inside) of the build session(s): the prompts, the agent's reasoning summaries, every tool call (shell commands, file edits, browser checks) and their results.
 
 How the AI was used is summarised in the main README (§13). Highlights you'll find in the transcript:
 
