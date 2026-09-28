@@ -1,0 +1,893 @@
+{
+ "status": "success",
+ "data": [
+  {
+   "store_code": "OBLRABG01",
+   "name": "Abbigere",
+   "address": "Abbigere, No.12, Sy No. 19/5, 2nd Cross,, Sri Sri Shivakumara Swamiji main road, Appayanna Layout, Bangalore, Karnataka, 560090",
+   "location_url": "https://maps.google.com/?q=13.072193,77.524871",
+   "geocoordinates": {
+    "latitude": 13.072193,
+    "longitude": 77.524871
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRAMR01",
+   "name": "Amruthahalli",
+   "address": "Amruthahalli, No. 1454/746/360, Talakaveri Layout, Amruthahalli Village, Bangalore, Karnataka, 560092",
+   "location_url": "https://maps.google.com/?q=13.065946,77.599405",
+   "geocoordinates": {
+    "latitude": 13.065946,
+    "longitude": 77.599405
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRAND01",
+   "name": "Andrahalli",
+   "address": "Andrahalli, No. 5 & 6, (katha  No. 78), (E-PID No. 2184768826), formed out of Sy.No. 12/1, Yeshwanthpur Hobli, Bangalore, Karnataka, 560091",
+   "location_url": "https://maps.google.com/?q=13.0081833,77.4863734",
+   "geocoordinates": {
+    "latitude": 13.0081833,
+    "longitude": 77.4863734
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRATT01",
+   "name": "Attur",
+   "address": "Attur, Site No.3 and Site No.2 & 2/1,, BBMP Khatha No. 41/3 and BBMP Khatha No. 41/2 & 41/2/1,, Attur Village, Yelahanka Hobli, Bangalore, Karnataka, 560064",
+   "location_url": "https://maps.google.com/?q=13.104631,77.566674",
+   "geocoordinates": {
+    "latitude": 13.104631,
+    "longitude": 77.566674
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OCHNARS01",
+   "name": "Avadi Road, Senneerkuppam",
+   "address": "Avadi Road, No.54, Senneerkuppam, Karayanchavadi, Church Main Road, Chennai, Tamil Nadu, 600056",
+   "location_url": "https://maps.google.com/?q=13.05117632,80.11253414",
+   "geocoordinates": {
+    "latitude": 13.05117632,
+    "longitude": 80.11253414
+   },
+   "is_operational": true,
+   "zone": "CHN"
+  },
+  {
+   "store_code": "OBLRALA01",
+   "name": "Avalahalli",
+   "address": "Avalahalli, Survey No. 3/4,, BBMP Number 24/918/130/385, Alahalli village, Uttarahalli Hobli, South Taluk, Bangalore, Karnataka, 560062",
+   "location_url": "https://maps.google.com/?q=12.8730504,77.561882",
+   "geocoordinates": {
+    "latitude": 12.8730504,
+    "longitude": 77.561882
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRBTS01",
+   "name": "BTS Layout",
+   "address": "BTS Layout, No. E-1/145, E-PID No. 6359247765,, Sl.No.15, 5th Main Road, Arekere Village, Begur Hobli,, Bangalore, Karnataka, 560076",
+   "location_url": "https://maps.google.com/?q=12.8870689,77.6054345",
+   "geocoordinates": {
+    "latitude": 12.8870689,
+    "longitude": 77.6054345
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRBBS01",
+   "name": "Babusapalya",
+   "address": "Babusapalya, No.10, Old PID No. 10/107/P/AP2/128/3,, Sy.No.128/3, Horamavu Village, Bangalore, Karnataka, 560043",
+   "location_url": "https://maps.google.com/?q=13.02641,77.6496661",
+   "geocoordinates": {
+    "latitude": 13.02641,
+    "longitude": 77.6496661
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRBVP01",
+   "name": "Basavanapura",
+   "address": "Basavanapura, Site Nos. 100 & 103, BBMP Khatha No. 103/142/9/14/3,, E-PID No. 3292778213, Sri Balaji Nilaya, Chikkabasavapura, 14th Cross, Basavanapura Main Road, Near Cambridge School, Bangalore, Karnataka, 560036",
+   "location_url": "https://maps.google.com/?q=13.01065,77.705629",
+   "geocoordinates": {
+    "latitude": 13.01065,
+    "longitude": 77.705629
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRBVN01",
+   "name": "Basaveshwaranagar",
+   "address": "Basaveshwaranagar, No. 640, E-PID No. 8184761140,, 8th B Main, 2nd Block, 3rd Stage,, Basaveshwaranagar, Bangalore, Karnataka, 560079",
+   "location_url": "https://maps.google.com/?q=12.99214885,77.54518757",
+   "geocoordinates": {
+    "latitude": 12.99214885,
+    "longitude": 77.54518757
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRBNR01",
+   "name": "Bharath Nagar",
+   "address": "Bharath Nagar, No.19, E-PID No. 2490796217,, Byregowda Layout,  Ward No. 72 (Herohalli),, Near Instakart Pvt Ltd, Bangalore, Karnataka, 560091",
+   "location_url": "https://maps.google.com/?q=12.976097,77.480234",
+   "geocoordinates": {
+    "latitude": 12.976097,
+    "longitude": 77.480234
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRBNN01",
+   "name": "Bhuvaneshwari Nagar",
+   "address": "Bhuvaneshwari Nagar, Katha No. 2719/21/17/1/40/1,, Nagadevanahalli, Kengeri Hobli, Bangalore, Karnataka, 560056",
+   "location_url": "https://maps.google.com/?q=12.9423816,77.4864212",
+   "geocoordinates": {
+    "latitude": 12.9423816,
+    "longitude": 77.4864212
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRBRT01",
+   "name": "Bhuvaneshwari Nagar, RT Nagar",
+   "address": "Bhuvaneshwari Nagar, RT Nagar, Municipal No.273/2, PID No. 96-106-273/2,, 1st Main Road, RT Nagar, BBMP Ward No.96, New Ward No. 22,, Cholanayakanahalli, Kasaba Hobli, Bangalore, Karnataka, 560032",
+   "location_url": "https://maps.google.com/?q=13.032788,77.60074",
+   "geocoordinates": {
+    "latitude": 13.032788,
+    "longitude": 77.60074
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRBNP01",
+   "name": "Binnypet",
+   "address": "Binnypet, 10/4, 6th Cross, Magadi Road,, 5th Main, Bhuvaneshwarinagara, Kempapura Agrahara, Bangalore, Karnataka, 560023",
+   "location_url": "https://maps.google.com/?q=12.9706389,77.5603056",
+   "geocoordinates": {
+    "latitude": 12.9706389,
+    "longitude": 77.5603056
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRBMR01",
+   "name": "Bommanahalli Main Road",
+   "address": "Bommanahalli Main Road, Khatha No. 360/338/267/60/4,7,1/11/4/12, Ward No. 175, Bommanahalli, Begur Hobli, Bangalore, Karnataka, 560068",
+   "location_url": "https://maps.google.com/?q=12.89837,77.62161",
+   "geocoordinates": {
+    "latitude": 12.89837,
+    "longitude": 77.62161
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRCHA01",
+   "name": "Chamundi Nagar, RT Nagar",
+   "address": "Chamundi Nagar, RT Nagar, No.76/81, PID No. 96-75-76/81,, 3rd Cross, Chowdaiah Block, Cholanayakanahalli Village, Bangalore, Karnataka, 560032",
+   "location_url": "https://maps.google.com/?q=13.029401,77.594874",
+   "geocoordinates": {
+    "latitude": 13.029401,
+    "longitude": 77.594874
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRCDL01",
+   "name": "Chandra Layout",
+   "address": "Chandra Layout, No. 901/902, 16th Cross,, Chandra Layout, 1st main,, 1st stage, 1st Phase,, Bangalore, Karnataka, 560026",
+   "location_url": "https://maps.google.com/?q=12.952611,77.522095",
+   "geocoordinates": {
+    "latitude": 12.952611,
+    "longitude": 77.522095
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRCKB01",
+   "name": "Chikkabidarakallu",
+   "address": "Chikkabidarakallu, Sy No. 44/2, 701, and 44/2A, 859,, Chikkabidarakallu Main Road,, Dasanapura Hobli, Bangalore, Karnataka, 560073",
+   "location_url": "https://maps.google.com/?q=13.05034726,77.48686117",
+   "geocoordinates": {
+    "latitude": 13.05034726,
+    "longitude": 77.48686117
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRCKL01",
+   "name": "Chikkalasandra",
+   "address": "Chikkalasandra, Site num 160, 161 and 162,, Khatha No 9, Arehalli Village,, Uttarahalli Hobli, Bangalore, Bangalore, Karnataka, 560061",
+   "location_url": "https://maps.google.com/?q=12.9182098656797,77.5467320741069",
+   "geocoordinates": {
+    "latitude": 12.9182098656797,
+    "longitude": 77.5467320741069
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRDGL01",
+   "name": "D Group Layout",
+   "address": "D Group Layout, Site No.880, Sy.No. 25/3,, Karnataka State “D” Group Employees Central Association Layout, Srigandhadhakaval Village, Bangalore, Karnataka, 560091",
+   "location_url": "https://maps.google.com/?q=12.972116,77.496985",
+   "geocoordinates": {
+    "latitude": 12.972116,
+    "longitude": 77.496985
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRDTL01",
+   "name": "Doctors Layout",
+   "address": "Doctors Layout, Site No. 168, Assessment No.43, Old No. 26/1, New No. 409, Naganathapura Village, Begur Hobli, Bangalore, Karnataka, 560100",
+   "location_url": "https://maps.google.com/?q=12.871387,77.667092",
+   "geocoordinates": {
+    "latitude": 12.871387,
+    "longitude": 77.667092
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRDBS01",
+   "name": "Doddabommasandra",
+   "address": "Doddabommasandra, No. 1/1, Old V.P Katha No. 753/754/1/1, New Byatrayanapura CMC Katha No. 524/1/1,, Doddabommasandra Village, Yelahanka Hobli, Bangalore, Karnataka, 560097",
+   "location_url": "https://maps.google.com/?q=13.061895,77.559012",
+   "geocoordinates": {
+    "latitude": 13.061895,
+    "longitude": 77.559012
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRGRN01",
+   "name": "Govindraj Nagar",
+   "address": "Govindraj Nagar, No. 18/1, PID No. 36-48-18/1, 1st Main Road, Thimmenahalli, Ward No. 36, Govindraj Nagar, Bangalore, Bengaluru, Karnataka, 560040",
+   "location_url": "https://maps.google.com/?q=12.9789397,77.5364568",
+   "geocoordinates": {
+    "latitude": 12.9789397,
+    "longitude": 77.5364568
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRHBR01",
+   "name": "HBR Layout",
+   "address": "HBR Layout, Site No.720, Khatha No. 349/349/720, E-PID No. 5861193483, 1st Stage, 2nd Block, Ward No. 24, HBR Layout, Bangalore, Karnataka, 560043",
+   "location_url": "https://maps.google.com/?q=13.025755,77.625387",
+   "geocoordinates": {
+    "latitude": 13.025755,
+    "longitude": 77.625387
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRHGN01",
+   "name": "Heggenahalli",
+   "address": "Heggenahalli, No.41, Assessment No 47, Khatha No.95, Hegganahalli Village, Veeranjaneya Temple Road, Bangalore, Karnataka, 560091",
+   "location_url": "https://maps.google.com/?q=13.002255,77.4983207",
+   "geocoordinates": {
+    "latitude": 13.002255,
+    "longitude": 77.4983207
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRHSN01",
+   "name": "Hoysala Nagar",
+   "address": "Hoysala Nagar, No. 13 & 14, Old Katha No. 225, New Katha No. 225/2, Ward No. 25 (Horamavu), Hoysala Nagar,, Krishnarajapura Hobli, Bangalore, Karnataka, 560016",
+   "location_url": "https://maps.google.com/?q=13.0153389,77.664074",
+   "geocoordinates": {
+    "latitude": 13.0153389,
+    "longitude": 77.664074
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRHMV01",
+   "name": "Hulimavu",
+   "address": "Hulimavu, No. 227, Bannerghatta Road,, Hulimavu, Near Maramma Temple,, Bangalore, Karnataka, 560076",
+   "location_url": "https://maps.google.com/?q=12.88024184,77.60181818",
+   "geocoordinates": {
+    "latitude": 12.88024184,
+    "longitude": 77.60181818
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRITI01",
+   "name": "ITI Layout",
+   "address": "ITI Layout, 829, BBMP Khatha No. 830/177/829,, BBMP Ward No. 129, Mallathahalli Village, Yeshwanthapura Hobli, Bangalore, Karnataka, 560056",
+   "location_url": "https://maps.google.com/?q=12.964891,77.499895",
+   "geocoordinates": {
+    "latitude": 12.964891,
+    "longitude": 77.499895
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRKMR01",
+   "name": "Kalkere Main Road",
+   "address": "Kalkere Main Road, Assessment No. 66/2, Kowdenahalli Village,, Ramamurthynagar, Sir M.V. Nagar, Bangalore, Karnataka, 560016",
+   "location_url": "https://maps.google.com/?q=13.017132,77.678337",
+   "geocoordinates": {
+    "latitude": 13.017132,
+    "longitude": 77.678337
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRKNN01",
+   "name": "Kalyana Nagar",
+   "address": "Kalyana Nagar - Nagarabhavi, No. 237, PID No. 38-116-237, Ward No. 127, 4th Cross, 1st Stage, 2nd Block,, Moodalapalya, Bangalore, Karnataka, 560072",
+   "location_url": "https://maps.google.com/?q=12.9680544,77.5159103",
+   "geocoordinates": {
+    "latitude": 12.9680544,
+    "longitude": 77.5159103
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRKSP01",
+   "name": "Kamakshipalya",
+   "address": "Kamakshipalya , No. 1/4, Khatha No.17-52-1/4, BBMP ward 102 - Vrushabhavathinagar, 8th Main Road, Maruthinagar, Bengaluru Urban, Karnataka, 560103",
+   "location_url": "https://maps.google.com/?q=12.991299,77.524837",
+   "geocoordinates": {
+    "latitude": 12.991299,
+    "longitude": 77.524837
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRKSP02",
+   "name": "Kamakshipalya 2",
+   "address": "Kamakshipalya 2, BBMP Khatha No.5, PID No. 17-1-5, Kamakshipalya Village Sy.No. 58, E-PID No. 5012647229, Saneguruvanahalli Village, Bangalore, Karnataka, 560079",
+   "location_url": "https://maps.google.com/?q=12.984823,77.528974",
+   "geocoordinates": {
+    "latitude": 12.984823,
+    "longitude": 77.528974
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OCHNKNT01",
+   "name": "Kaveri Nagar, Thiruvanmiyur",
+   "address": "Kaveri Nagar, Thiruvanmiyur, Door No. 231, Kuppam Road, Kaveri Nagar, Chennai, Tamil Nadu, 600068",
+   "location_url": "https://maps.google.com/?q=12.973889,80.263194",
+   "geocoordinates": {
+    "latitude": 12.973889,
+    "longitude": 80.263194
+   },
+   "is_operational": true,
+   "zone": "CHN"
+  },
+  {
+   "store_code": "OBLRKMP01",
+   "name": "Kempapura",
+   "address": "Kempapura, PID No. 199/8/3, 8 &9, E-PID No. 6435256940,, Ward No. 7 - Byatarayanapura, Yelahanka Hobli, Bangalore, Karnataka, 560024",
+   "location_url": "https://maps.google.com/?q=13.049594,77.5989991",
+   "geocoordinates": {
+    "latitude": 13.049594,
+    "longitude": 77.5989991
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRKGN01",
+   "name": "Kempegowdanagar",
+   "address": "Kempegowdanagar, No. 02, Chandrana Layout, Assessment No.10/2, formed in Sy. No.10/2, Magadi Main Road, Vishwaneedam Post, Hosahalli Gollarapalya Village, Yeshwanthpura Hobli, Bangalore, Karnataka, 560091",
+   "location_url": "https://maps.google.com/?q=12.9875817,77.4760721",
+   "geocoordinates": {
+    "latitude": 12.9875817,
+    "longitude": 77.4760721
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRKST01",
+   "name": "Kengeri Satellite Town",
+   "address": "Kengeri Satellite Town, No. 1479, BBMP E-PID No. 2532100326, Assessment No. 375/1479, Kengeri Upanagar, 1st Stage, Kalikamba Road, Near Robin Theatre, Bangalore, Karnataka, 560060",
+   "location_url": "https://maps.google.com/?q=12.918486,77.48056",
+   "geocoordinates": {
+    "latitude": 12.918486,
+    "longitude": 77.48056
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRKGH01",
+   "name": "Kodigehalli",
+   "address": "Kodigehalli, Site No. 156, BBMP Katha No. 2893/213/2/156, Kodigehalli Village, Yelahanka Hobli, Bangalore, Karnataka, 560097",
+   "location_url": "https://maps.google.com/?q=13.064538,77.573692",
+   "geocoordinates": {
+    "latitude": 13.064538,
+    "longitude": 77.573692
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OCHNLKP01",
+   "name": "Lakshmipuram",
+   "address": "Lakshmipuram, Plot No.14, 40 feet Road, Srinivasa Nagar,, Ayyan Thiruvalluvar Salai, Near Export Office (N032),, Chennai, Tamil Nadu, 600053",
+   "location_url": "https://maps.google.com/?q=13.13737372,80.20133418",
+   "geocoordinates": {
+    "latitude": 13.13737372,
+    "longitude": 80.20133418
+   },
+   "is_operational": true,
+   "zone": "CHN"
+  },
+  {
+   "store_code": "OBLRMLS01",
+   "name": "Mallasandra",
+   "address": "Mallasandra, Site No.9 & 10, Old Assessment No.41/1, New Assessment No. 41/1A,, Mallasandra Village, Yeshwantpura Hobli, Bangalore, Karnataka, 560057",
+   "location_url": "https://maps.google.com/?q=13.053229,77.516615",
+   "geocoordinates": {
+    "latitude": 13.053229,
+    "longitude": 77.516615
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRMLT01",
+   "name": "Mallathahalli",
+   "address": "Mallathahalli, BDA site No. 345, PID No. 4312090775, 9th Block, Sir M Vishweshwaraiah layout, Bangalore, Karnataka, 560056",
+   "location_url": "https://maps.google.com/?q=12.960887,77.502559",
+   "geocoordinates": {
+    "latitude": 12.960887,
+    "longitude": 77.502559
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OCHNMAN01",
+   "name": "Manali",
+   "address": "Manali, No 3/27/1, Parthasarathy Street,, Chinnachekkadu North, Chinnachekkadu, Chennai, Tamil Nadu, 600068",
+   "location_url": "https://maps.google.com/?q=13.162268,80.258632",
+   "geocoordinates": {
+    "latitude": 13.162268,
+    "longitude": 80.258632
+   },
+   "is_operational": true,
+   "zone": "CHN"
+  },
+  {
+   "store_code": "OBLRMNN01",
+   "name": "Manjunath Nagar",
+   "address": "Manjunath Nagar, BDA Site No. 625, 8th B Main, II Block, III Stage, BBMP ward No. 100, PID No. 19-2-625, West of Chord Road, Bangalore, Karnataka, 560079",
+   "location_url": "https://maps.google.com/?q=12.991965,77.543565",
+   "geocoordinates": {
+    "latitude": 12.991965,
+    "longitude": 77.543565
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRMTR01",
+   "name": "Maruti Tent Road",
+   "address": "Maruti Tent Road, 12/83-3/121/1, Srigandhada Kaval,, Srinivasanagar, Sunkadakatte Village, Yeshwanthpur Hobli, Bangalore, Karnataka, 560091",
+   "location_url": "https://maps.google.com/?q=12.9954307,77.5085658",
+   "geocoordinates": {
+    "latitude": 12.9954307,
+    "longitude": 77.5085658
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRMTK01",
+   "name": "Mathikere",
+   "address": "Mathikere, 12/1, PID No. 3-64-12/1, 2nd Cross, Model Colony, Pipeline Road, Bangalore, Karnataka, 560097",
+   "location_url": "https://maps.google.com/?q=13.022005,77.554964",
+   "geocoordinates": {
+    "latitude": 13.022005,
+    "longitude": 77.554964
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OCHNMAT01",
+   "name": "Mathur",
+   "address": "Mathur, Plot no. 4051/MIG type,, TNHB, MMDA 1st main road, Mathur, Chennai, Tamil Nadu, 600068",
+   "location_url": "https://maps.google.com/?q=13.167768,80.247988",
+   "geocoordinates": {
+    "latitude": 13.167768,
+    "longitude": 80.247988
+   },
+   "is_operational": true,
+   "zone": "CHN"
+  },
+  {
+   "store_code": "OBLRMDP01",
+   "name": "Moodalapalya",
+   "address": "Moodalapalya, No. 50, 1st Main, Huchappa Layout,, PID No. 37-67-50, Khatha No. 50/48,, Malagalu Village, Bangalore, Karnataka, 560072",
+   "location_url": "https://maps.google.com/?q=12.9716351,77.5251269",
+   "geocoordinates": {
+    "latitude": 12.9716351,
+    "longitude": 77.5251269
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRMWN01",
+   "name": "Muneshwara Nagar",
+   "address": "Muneshwara Nagar, House List No.12, No. 108, Khatha No. 177, Hongasandra Village, Begur Hobli, Bangalore, Karnataka, 560068",
+   "location_url": "https://maps.google.com/?q=12.89903083,77.63913433",
+   "geocoordinates": {
+    "latitude": 12.89903083,
+    "longitude": 77.63913433
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRNRI01",
+   "name": "NRI Layout",
+   "address": "NRI Layout, Site No.7 & 8, House list Katha No. 329/1P, Property Nos. 375, 378, 379, & 386, Kalkere Village, Ward No.26 - Ramamurthynagar, Bangalore, Karnataka, 560016",
+   "location_url": "https://maps.google.com/?q=13.02616,77.682507",
+   "geocoordinates": {
+    "latitude": 13.02616,
+    "longitude": 77.682507
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRNMR01",
+   "name": "Nagasandra Main Road",
+   "address": "Nagasandra Main Road, No.1418, Khatha No. 1/3A,, HMT Layout, Nagasandra,, Nelagadaranahalli village,, Bangalore, Karnataka, 560073",
+   "location_url": "https://maps.google.com/?q=13.03933785,77.50112438",
+   "geocoordinates": {
+    "latitude": 13.03933785,
+    "longitude": 77.50112438
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRNPH01",
+   "name": "Nyanappanahalli",
+   "address": "Nyanappanahalli, No. 1 & 4, Katha No. 2/1,, E-PID No. 1289963514, Marappa Garden, Begur Hobli, Bangalore, Karnataka, 560114",
+   "location_url": "https://maps.google.com/?q=12.87918594,77.61507437",
+   "geocoordinates": {
+    "latitude": 12.87918594,
+    "longitude": 77.61507437
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLROMR01",
+   "name": "Oil Mill Road",
+   "address": "Oil Mill Road, BBMP No. 21 (earlier House List No. 29 and Khatha No. 84/2), 1st Cross, Ward No. 89, PID No. 89-121-21, Oil Mill Road, Bangalore, Karnataka, 560068",
+   "location_url": "https://maps.google.com/?q=13.0126837,77.6273219",
+   "geocoordinates": {
+    "latitude": 13.0126837,
+    "longitude": 77.6273219
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OCHNPLV01",
+   "name": "Palavakkam",
+   "address": "Palavakkam, Door No.2/183, EVR Periyar Salai,, S. No 100/2, Palavakkam, Chennai, Tamil Nadu, 600041",
+   "location_url": "https://maps.google.com/?q=12.96430471,80.25421793",
+   "geocoordinates": {
+    "latitude": 12.96430471,
+    "longitude": 80.25421793
+   },
+   "is_operational": true,
+   "zone": "CHN"
+  },
+  {
+   "store_code": "OCHNPER01",
+   "name": "Perambur",
+   "address": "Perambur, No. 9, Jawahar Street, Madhavaram, Ramana Nagar, Chennai, Tamil Nadu, 600011",
+   "location_url": "https://maps.google.com/?q=13.11948864,80.2448056",
+   "geocoordinates": {
+    "latitude": 13.11948864,
+    "longitude": 80.2448056
+   },
+   "is_operational": true,
+   "zone": "CHN"
+  },
+  {
+   "store_code": "OBLRPKN01",
+   "name": "Prakash Nagar",
+   "address": "Prakash Nagar, No. 925/60, BBMP PID No. 23-19-60,, 7th Main Road, Prakashnagar, Ward No.98- Prakashnagar, Bangalore, Karnataka, 560064",
+   "location_url": "https://maps.google.com/?q=12.994089,77.5578",
+   "geocoordinates": {
+    "latitude": 12.994089,
+    "longitude": 77.5578
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRRPC01",
+   "name": "RPC Layout",
+   "address": "RPC Layout, No. 41, Property No. 2081/41, PID No. 34-56-41, E-PID No. 5113007901, 9th Cross Road,, Ward No. 124 (Hosahalli), Bangalore, Karnataka, 560104",
+   "location_url": "https://maps.google.com/?q=12.967114,77.541326",
+   "geocoordinates": {
+    "latitude": 12.967114,
+    "longitude": 77.541326
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRRRN01",
+   "name": "Rajarajeshwari Nagar",
+   "address": "Rajarajeshwari Nagar, 5th Main, 1st cross, Jeevandeep LIC Layout, Rajarajeshwarinagar, Bangalore, Karnataka, 560098",
+   "location_url": "https://maps.google.com/?q=12.911634,77.510689",
+   "geocoordinates": {
+    "latitude": 12.911634,
+    "longitude": 77.510689
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRRAN01",
+   "name": "Ramanjaneya Nagar",
+   "address": "Ramanjaneya Nagar, No.41, Katha No. 1093/1111/41,, Anjaneya HBCS, Ward No. 197 (Vasanthapura),, Chikallasandra (BDA), Bangalore, Karnataka, 560061",
+   "location_url": "https://maps.google.com/?q=12.914596,77.547087",
+   "geocoordinates": {
+    "latitude": 12.914596,
+    "longitude": 77.547087
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRRYS01",
+   "name": "Rayasandra",
+   "address": "Rayasandra, No. 33, Katha No. 937, Sy.No.133, New No. 133/1, Rayasandra Village, Sarjapura Hobli, Bangalore, Karnataka, 560099",
+   "location_url": "https://maps.google.com/?q=12.880539,77.674788",
+   "geocoordinates": {
+    "latitude": 12.880539,
+    "longitude": 77.674788
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OCHNSNT01",
+   "name": "Sakthivel Nagar, Thiruverkadu",
+   "address": "Sakthivel Nagar, Thiruverkadu, P No. A3,, S No. 169/2, Sivan Koil Street, Chennai, Tamil Nadu, 600077",
+   "location_url": "https://maps.google.com/?q=13.071371,80.115341",
+   "geocoordinates": {
+    "latitude": 13.071371,
+    "longitude": 80.115341
+   },
+   "is_operational": true,
+   "zone": "CHN"
+  },
+  {
+   "store_code": "OBLRSDH01",
+   "name": "Siddedahalli",
+   "address": "Siddedahalli, Site No.1, Khatha No.10/2, Meenakshi Layout, Siddedahalli Village (Bagalagunte), Bangalore, Karnataka, 560073",
+   "location_url": "https://maps.google.com/?q=13.065624,77.493298",
+   "geocoordinates": {
+    "latitude": 13.065624,
+    "longitude": 77.493298
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRSPL01",
+   "name": "Singapura",
+   "address": "Singapura Layout, #12, Shree Sampada, 2nd Cross,, Singapura Main Road, Singapura Layout, Bangalore, Karnataka, 560097",
+   "location_url": "https://maps.google.com/?q=13.0766,77.53873",
+   "geocoordinates": {
+    "latitude": 13.0766,
+    "longitude": 77.53873
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRSNS01",
+   "name": "Srigandha Nagar, Sunkadakatte",
+   "address": "Srigandha Nagar, Sunkadakatte, No.1 and 2, Assessment No. 85/10, E-PID No. 6012522860, Srigandhada kaval village, Srinivasanagar, Sollapuradamma layout, Bangalore, Karnataka, 560091",
+   "location_url": "https://maps.google.com/?q=12.995231,77.504925",
+   "geocoordinates": {
+    "latitude": 12.995231,
+    "longitude": 77.504925
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRSNB01",
+   "name": "Srinivasnagar",
+   "address": "Srinivasnagar, Banashankari, BBMP No 21 ( Old No. 38), PID No. 54-289-21, 3rd Main Road, Cauvery Nagar, Kathriguppe Village, Bengaluru Urban, Karnataka, 560050",
+   "location_url": "https://maps.google.com/?q=12.93364,77.555107",
+   "geocoordinates": {
+    "latitude": 12.93364,
+    "longitude": 77.555107
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRSBC01",
+   "name": "Syndicate Bank Colony",
+   "address": "Syndicate Bank Colony, No. 351, Sy.No.62, 7th Main Road,, 7th Block, 4th Phase, Kathriguppe, Bangalore, Karnataka, 560070",
+   "location_url": "https://maps.google.com/?q=12.92174,77.555841",
+   "geocoordinates": {
+    "latitude": 12.92174,
+    "longitude": 77.555841
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRTDH01",
+   "name": "T Dasarahalli",
+   "address": "T Dasarahalli, No.13, EPID No. 1625883084, Beereshwara Nilaya,, 1st Main road, KK Road, Yeshwanthapura Hobli, Bangalore, Karnataka, 560057",
+   "location_url": "https://maps.google.com/?q=13.04607,77.512739",
+   "geocoordinates": {
+    "latitude": 13.04607,
+    "longitude": 77.512739
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRTRR01",
+   "name": "Tannery Road",
+   "address": "Tannery Road, No. 90-1-1/137,, Ward No.60, Sagayapuram, B.S. Ambedkar Road (BSA Road), Bangalore, Karnataka, 560084",
+   "location_url": "https://maps.google.com/?q=13.00765168,77.6128307",
+   "geocoordinates": {
+    "latitude": 13.00765168,
+    "longitude": 77.6128307
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OCHNTNC01",
+   "name": "Thamarai Nagar, Cholambedu",
+   "address": "Thamarai Nagar, New S No.3/2, No. SF No.531/1A1B Part, 533/1A Part,, Choolambedu Main Road, Thirumullaivoyal, Chennai, Tamil Nadu, 600062",
+   "location_url": "https://maps.google.com/?q=13.12083988,80.13787845",
+   "geocoordinates": {
+    "latitude": 13.12083988,
+    "longitude": 80.13787845
+   },
+   "is_operational": true,
+   "zone": "CHN"
+  },
+  {
+   "store_code": "OBLRTNS01",
+   "name": "Thanisandra",
+   "address": "Thanisandra, No. 951/1A, No. 951/6A, Narayanaswamy Road, Near Govt School, Sanchar Nagar, Gedalahalli, Thanisandra, Bangalore, Karnataka, 560077",
+   "location_url": "https://maps.google.com/?q=13.05128746,77.63468996",
+   "geocoordinates": {
+    "latitude": 13.05128746,
+    "longitude": 77.63468996
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRTMR01",
+   "name": "Thigalarapalya Main Road",
+   "address": "Thigalarapalya Main Road, No.01, Karivobanahalli, (Nelagedaranahalli), 47/1,, Ward No.40-Doddabiddarakallu, Bangalore, Karnataka, 560058",
+   "location_url": "https://maps.google.com/?q=13.014086,77.491365",
+   "geocoordinates": {
+    "latitude": 13.014086,
+    "longitude": 77.491365
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRTNR01",
+   "name": "Thunga Nagar",
+   "address": "Thunga Nagar, Old Site No.953/19, New Site No. 19, Old Khatha No. 148, New Khatha No. 1197/148, E-PID No. 2219543276, Herohalli village, Yeshwanthapura Hobli, Bangalore, Karnataka, 560091",
+   "location_url": "https://maps.google.com/?q=12.991551,77.485024",
+   "geocoordinates": {
+    "latitude": 12.991551,
+    "longitude": 77.485024
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OCHNTND01",
+   "name": "Tondiarpet",
+   "address": "Tondiarpet, S No.3647/18, Block No.54, Old Door No.81, New Door No.48,, Thandavarayagramani Street, Chennai, Tamil Nadu, 600081",
+   "location_url": "https://maps.google.com/?q=13.12289502,80.29022281",
+   "geocoordinates": {
+    "latitude": 13.12289502,
+    "longitude": 80.29022281
+   },
+   "is_operational": true,
+   "zone": "CHN"
+  },
+  {
+   "store_code": "OCHNVNK01",
+   "name": "Vivekananda Nagar, Kodungaiyur East",
+   "address": "Vivekananda Nagar, Kodungaiyur East, No.69 (96), Meenambal Salai,, Erukkencherry, Ambedkar 2nd  Street, Chennai, Tamil Nadu, 600118",
+   "location_url": "https://maps.google.com/?q=13.12916511,80.25880305",
+   "geocoordinates": {
+    "latitude": 13.12916511,
+    "longitude": 80.25880305
+   },
+   "is_operational": true,
+   "zone": "CHN"
+  },
+  {
+   "store_code": "OBLRVNR01",
+   "name": "Viveknagar",
+   "address": "Viveknagar, No. 434, PID No. 71-9-434, New E-PID No. 4848270808,, 11th Main, 4th Cross,, Vivekanagar, Bangalore, Karnataka, 560047",
+   "location_url": "https://maps.google.com/?q=12.95137534,77.62269196",
+   "geocoordinates": {
+    "latitude": 12.95137534,
+    "longitude": 77.62269196
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  },
+  {
+   "store_code": "OBLRYNT01",
+   "name": "Yelahanka New Town",
+   "address": "Yelahanka New Town, No.75, BBMP Khata No.205, 4th phase, CHS 707,, 1st Main road,, Bangalore, Karnataka, 560064",
+   "location_url": "https://maps.google.com/?q=13.103688,77.575668",
+   "geocoordinates": {
+    "latitude": 13.103688,
+    "longitude": 77.575668
+   },
+   "is_operational": true,
+   "zone": "BLR"
+  }
+ ]
+}
