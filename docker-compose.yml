@@ -1,0 +1,13 @@
+services:
+  sitescout:
+    build: .
+    ports: ["8000:8000"]
+    env_file:
+      - path: backend/.env
+        required: false
+    volumes:
+      - sitescout-data:/app/backend/data
+      - sitescout-uploads:/app/backend/uploads
+volumes:
+  sitescout-data:
+  sitescout-uploads:
