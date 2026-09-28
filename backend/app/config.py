@@ -38,10 +38,6 @@ class Settings(BaseSettings):
     nominatim_user_agent: str = "SavoSiteScout/0.1 (hackathon demo)"
     enable_reverse_geocode: bool = True
 
-    # OSRM (drive times to existing stores). Public demo server; optional.
-    osrm_url: str = "https://router.project-osrm.org"
-    enable_osrm: bool = False
-
     # Catchment reuse policy
     reuse_min_coverage: float = 0.8   # share of the new catchment already surveyed
     reuse_max_age_days: int = 180     # survey data older than this is "stale"
