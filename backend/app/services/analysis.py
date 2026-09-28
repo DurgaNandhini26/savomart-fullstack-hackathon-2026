@@ -66,7 +66,7 @@ def find_hotspots(db: Session, cells8: list[str], dist: S.Distributions, stores,
                          .order_by(Road.highway.in_(["trunk", "primary", "secondary"]).desc(), Road.length_m.desc()))
         near = m["nearest_stores"][0] if m["nearest_stores"] else None
         reasons = [f"~{m['population']:,} residents within ~750 m (est.)"]
-        reasons.append(f"{m['grocery_outlets']} grocery outlets mapped within ~750 m"
+        reasons.append(f"{m['grocery_outlets']} grocery outlet{'s' if m['grocery_outlets'] != 1 else ''} mapped within ~750 m"
                        if m["grocery_outlets"] else "No grocery outlets mapped within ~750 m")
         if road:
             reasons.append(f"On/near {road.name} ({road.highway})")

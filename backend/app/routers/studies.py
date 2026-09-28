@@ -124,6 +124,7 @@ def get_study(sid: int, db: Session = Depends(get_db), user: User = Depends(curr
         "insights": st.insights,
         "suggested_units": C.suggest_units(sum(weights.values()), len(role_users(db, "survey_exec"))) if weights else None,
         "lane_km_estimate": round(sum(weights.values()) / 1000, 1) if weights else None,
+        "surveyors": len(role_users(db, "survey_exec")), "lane_km_per_day": C.LANE_KM_PER_DAY,
         "property": {"id": st.property.id, "code": st.property.code, "title": st.property.title,
                      "lat": st.property.lat, "lng": st.property.lng} if st.property else None,
         "report": {"id": st.report.id, "name": st.report.name} if st.report else None,

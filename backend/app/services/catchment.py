@@ -106,8 +106,9 @@ def compass(b: float) -> str:
 
 
 def suggest_units(total_lane_m: float, surveyors: int) -> int:
+    """One unit per available surveyor, but never units smaller than ~half a day's walking."""
     days = total_lane_m / 1000 / LANE_KM_PER_DAY
-    return max(1, min(8, max(math.ceil(days), min(surveyors, math.ceil(days * 2)))))
+    return max(1, min(8, surveyors, math.ceil(days * 2)))
 
 
 def plan_work(db: Session, st: CatchmentStudy, k: int) -> list[WorkUnit]:
@@ -140,7 +141,7 @@ def plan_work(db: Session, st: CatchmentStudy, k: int) -> list[WorkUnit]:
         for osm_id, segs in by_way.items():
             segs.sort(key=lambda r: r.seg)
             length = sum(r.length_m for r in segs)
-            if length < 25:
+            if length < 40:  # slivers where a street just clips a cell edge
                 continue
             db.add(SurveyLane(study_id=st.id, work_unit_id=u.id, road_id=segs[0].id,
                               name=segs[0].name, highway=segs[0].highway,

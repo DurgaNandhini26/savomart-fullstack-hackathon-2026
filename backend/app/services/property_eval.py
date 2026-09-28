@@ -198,7 +198,7 @@ def evaluate(db: Session, prop: Property) -> dict:
     net = S.network_score(m["nearest_store_km"])
 
     insights += [f"~{m['population']:,} residents within {CATCHMENT_M} m (est.), "
-                 f"{m['grocery_outlets']} grocery outlets mapped nearby."]
+                 f"{m['grocery_outlets']} grocery outlet{'s' if m['grocery_outlets'] != 1 else ''} mapped nearby."]
     near = m["nearest_stores"][0] if m["nearest_stores"] else None
     if near and near["distance_km"] < 1.5:
         risks.append(f"Only {near['distance_km']} km from Savomart {near['name']} — likely cannibalisation.")
