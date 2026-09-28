@@ -194,7 +194,10 @@ def get_property(pid: int, db: Session = Depends(get_db), user: User = Depends(c
                             .order_by(PropertyEvaluation.version.desc())))
     events = list(db.scalars(select(PropertyEvent).where(PropertyEvent.property_id == pid).order_by(PropertyEvent.id.desc())))
     studies = [s for s in db.scalars(select(CatchmentStudy)) if s.property_id == pid or p.h3_9 in set(s.requested_cells)]
-    return {**property_full(p), "evaluation": evaluation_dict(db, evals[0]) if evals else None,
+    done = next((e for e in evals if e.status == "completed"), None)
+    pending = evals[0] if evals and evals[0].status != "completed" else None
+    return {**property_full(p), "evaluation": evaluation_dict(db, done),
+            "pending_evaluation": evaluation_dict(db, pending),
             "evaluations": [{"version": e.version, "trigger": e.trigger, "score": e.score, "status": e.status,
                              "recommendation": e.recommendation, "created_at": e.created_at.isoformat() + "Z"} for e in evals],
             "events": [event_dict(e) for e in events], "allowed_transitions": P.allowed_next(p, user),

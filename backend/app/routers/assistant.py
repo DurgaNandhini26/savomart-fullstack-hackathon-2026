@@ -157,7 +157,7 @@ def _template(f: dict) -> str:
                          f"{a['residents_per_outlet']:,} | {ns['name'] + ' · ' + str(ns['distance_km']) + ' km' if ns else '—'} |")
         best = ranked[0]
         top_p = max(best["pillars"].items(), key=lambda x: x[1])
-        lines.append(f"\n**{best['area']}** leads, driven by *{top_p[0]}* ({top_p[1]} percentile).")
+        lines.append(f"\n**{best['area']}** leads; its strongest pillar is *{top_p[0]}* ({top_p[1]:.0f}/100).")
     for p in f["properties"]:
         lines.append(f"\n**{p['code']} {p['title']}** — stage *{p['stage']}*, score {p['score']} ({p['recommendation']}).")
     for s in f["studies"]:

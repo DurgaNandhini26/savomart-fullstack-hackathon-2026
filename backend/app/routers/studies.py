@@ -327,3 +327,19 @@ def study_progress(sid: int, db: Session = Depends(get_db), _: User = Depends(cu
     if not st:
         raise HTTPException(404, "Study not found")
     return {**C.progress(db, st), "status": st.status, "updated": iso(utcnow())}
+
+
+@router.get("/team")
+def team(db: Session = Depends(get_db), _: User = Depends(require("survey_manager"))):
+    """Survey executives' current workload, so the manager can split work fairly."""
+    out = []
+    for ex in role_users(db, "survey_exec"):
+        units = list(db.scalars(select(WorkUnit).where(WorkUnit.assignee_id == ex.id)))
+        active = [u for u in units if u.status != "done"]
+        lanes = [l for u in active for l in u.lanes]
+        left_m = sum(l.length_m for l in lanes if l.status == "pending")
+        out.append({"user": {"id": ex.id, "name": ex.name, "phone": ex.phone},
+                    "active_units": [{"id": u.id, "name": u.name, "study": u.study.code, "status": u.status} for u in active],
+                    "done_units": len(units) - len(active), "lanes_left": sum(1 for l in lanes if l.status == "pending"),
+                    "km_left": round(left_m / 1000, 1), "days_left": round(left_m / 1000 / C.LANE_KM_PER_DAY, 1)})
+    return out

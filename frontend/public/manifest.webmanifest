@@ -1,0 +1,9 @@
+{
+  "name": "Savo SiteScout",
+  "short_name": "SiteScout",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#782B90",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

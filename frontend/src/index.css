@@ -1,0 +1,53 @@
+@import "tailwindcss";
+@import "maplibre-gl/dist/maplibre-gl.css";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* Savomart brand */
+  --color-savo-50: #f7f0f9;
+  --color-savo-100: #ecdcf1;
+  --color-savo-200: #d9b9e3;
+  --color-savo-300: #bf8dd0;
+  --color-savo-400: #a060b7;
+  --color-savo-500: #8a3da3;
+  --color-savo-600: #782b90;   /* brand purple */
+  --color-savo-700: #62237a;
+  --color-savo-800: #4d1c60;
+  --color-savo-900: #34133f;
+  --color-sun: #fff200;        /* brand yellow */
+  --color-sun-dark: #e6d900;
+}
+
+html, body, #root { height: 100%; }
+body { @apply bg-slate-50 text-slate-800 antialiased; -webkit-tap-highlight-color: transparent; }
+
+@utility card { @apply bg-white rounded-2xl border border-slate-200/80 shadow-sm; }
+@utility btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition active:scale-[.98] disabled:opacity-50 disabled:pointer-events-none; }
+@utility btn-primary { @apply btn bg-savo-600 text-white hover:bg-savo-700 shadow-sm; }
+@utility btn-sun { @apply btn bg-sun text-savo-900 hover:bg-sun-dark shadow-sm; }
+@utility btn-ghost { @apply btn bg-white text-slate-700 border border-slate-200 hover:bg-slate-50; }
+@utility btn-danger { @apply btn bg-rose-600 text-white hover:bg-rose-700; }
+@utility input { @apply w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-[15px] outline-none focus:border-savo-500 focus:ring-2 focus:ring-savo-200 disabled:bg-slate-100; }
+@utility label { @apply block text-xs font-semibold uppercase tracking-wide text-slate-500 mb-1; }
+@utility chip { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold; }
+@utility h-page { @apply text-2xl font-extrabold tracking-tight text-slate-900; }
+
+/* minimal markdown styling for assistant answers */
+.md p { margin: .4em 0; }
+.md ul { list-style: disc; padding-left: 1.2em; margin: .4em 0; }
+.md table { border-collapse: collapse; margin: .5em 0; }
+.md th { font-weight: 600; }
+.md strong { font-weight: 700; }
+
+.maplibregl-popup-content { @apply rounded-xl shadow-lg text-sm; padding: 10px 12px; }
+.maplibregl-ctrl-attrib { font-size: 10px; }
+
+/* thin progress shimmer for running jobs */
+@keyframes shimmer { 0% { background-position: -200px 0 } 100% { background-position: 200px 0 } }
+.shimmer { background: linear-gradient(90deg, transparent, rgba(255,255,255,.6), transparent); background-size: 200px 100%; animation: shimmer 1.2s infinite; }
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; }
+  .print-break { break-before: page; }
+}
