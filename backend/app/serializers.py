@@ -101,7 +101,7 @@ def unit_dict(u: WorkUnit, with_geo: bool = True) -> dict:
          "lanes_done": len(done), "km_done": round(sum(l.length_m for l in done) / 1000, 2),
          "due_date": iso(u.due_date), "n_cells": len(u.cells)}
     if with_geo:
-        d["outline"] = geo.cells_outline(u.cells)
+        d["outline"] = u.outline or geo.cells_outline(u.cells)
     return d
 
 

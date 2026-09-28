@@ -22,6 +22,7 @@ from datetime import timedelta
 
 import h3
 from sqlalchemy import select
+from shapely.geometry import Polygon, mapping, shape
 from sqlalchemy.orm import Session
 
 from .. import geo
@@ -76,29 +77,47 @@ def lane_weights(db: Session, cells: list[str]) -> dict[str, float]:
     return w
 
 
-def split_cells(cells: list[str], weights: dict[str, float], center: tuple[float, float], k: int) -> list[list[str]]:
-    """Angular-sweep partition into k contiguous sectors of ~equal weight. Pure function."""
-    k = max(1, min(k, len(cells)))
+def split_by_bearing(items: list[tuple], center: tuple[float, float], k: int) -> list[list]:
+    """Angular-sweep partition into k contiguous wedges of ~equal total weight. Pure function.
+
+    items: (key, lat, lng, weight). Sorting by compass bearing from the centre and cutting the
+    cumulative weight into k equal slices gives wedges that never overlap, are contiguous, and
+    all touch the centre (short commute to each surveyor's first lane).
+    """
+    k = max(1, min(k, len(items)))
     clat, clng = center
 
-    def bearing(c):
-        lat, lng = h3.cell_to_latlng(c)
-        if geo.haversine_m(clat, clng, lat, lng) < 1:
+    def bearing(it):
+        _, lat, lng, _ = it
+        if geo.haversine_m(clat, clng, lat, lng) < 30:
             return -1.0
         return geo.bearing_deg(clat, clng, lat, lng)
 
-    ordered = sorted(cells, key=bearing)
-    total = sum(weights.get(c, 1.0) for c in ordered) or 1.0
+    ordered = sorted(items, key=bearing)
+    total = sum(it[3] for it in ordered) or 1.0
     target = total / k
-    groups: list[list[str]] = [[]]
+    groups: list[list] = [[]]
     acc = 0.0
-    for c in ordered:
-        w = weights.get(c, 1.0)
-        if acc + w / 2 > target * len(groups) and len(groups) < k:
+    for it in ordered:
+        if acc + it[3] / 2 > target * len(groups) and len(groups) < k:
             groups.append([])
-        groups[-1].append(c)
-        acc += w
+        groups[-1].append(it[0])
+        acc += it[3]
     return [g for g in groups if g]
+
+
+def wedge(center: tuple[float, float], b0: float, b1: float, radius_m: float) -> Polygon:
+    """Pie slice from bearing b0 clockwise to b1 (degrees), as a lon/lat polygon."""
+    clat, clng = center
+    span = (b1 - b0) % 360 or 360
+    steps = max(4, int(span / 5))
+    pts = [(clng, clat)]
+    for i in range(steps + 1):
+        b = math.radians(b0 + span * i / steps)
+        dlat = radius_m * math.cos(b) / 110540
+        dlng = radius_m * math.sin(b) / (111320 * math.cos(math.radians(clat)))
+        pts.append((clng + dlng, clat + dlat))
+    return Polygon(pts)
 
 
 def compass(b: float) -> str:
@@ -120,32 +139,59 @@ def plan_work(db: Session, st: CatchmentStudy, k: int) -> list[WorkUnit]:
     db.query(SurveyLane).filter(SurveyLane.study_id == st.id).delete()
     db.flush()
 
-    weights = lane_weights(db, st.cells)
-    groups = split_cells(st.cells, weights, (st.center_lat, st.center_lng), k)
+    # Split at road-segment granularity (a segment is a street piece inside one ~0.1 km² cell),
+    # weighted by length = walking effort. Cells alone are too coarse for small catchments.
+    segs: list[Road] = []
+    for i in range(0, len(st.cells), 900):
+        segs.extend(db.scalars(select(Road).where(Road.h3_9.in_(st.cells[i:i + 900]))))
+    by_id = {r.id: r for r in segs}
+    groups = split_by_bearing([(r.id, r.mid_lat, r.mid_lng, r.length_m) for r in segs],
+                              (st.center_lat, st.center_lng), k)
+    # wedge boundaries sit halfway between neighbouring groups' outermost segments
+    center = (st.center_lat, st.center_lng)
+
+    def brg(r: Road) -> float | None:
+        if geo.haversine_m(st.center_lat, st.center_lng, r.mid_lat, r.mid_lng) < 30:
+            return None
+        return geo.bearing_deg(st.center_lat, st.center_lng, r.mid_lat, r.mid_lng)
+
+    spans = []
+    for g in groups:
+        bs = [b for b in (brg(by_id[x]) for x in g) if b is not None]
+        spans.append((bs[0], bs[-1]) if bs else (0.0, 0.0))
+    cuts = []
+    for i in range(len(groups)):
+        prev_end = spans[i - 1][1]
+        start = spans[i][0]
+        cuts.append((prev_end + ((start - prev_end) % 360) / 2) % 360)
+    area = shape(geo.cells_outline(st.cells)).buffer(0)  # only the part actually being surveyed
+    radius = max((geo.haversine_m(st.center_lat, st.center_lng, r.mid_lat, r.mid_lng) for r in segs), default=500) * 1.6 + 200
     units = []
     for i, g in enumerate(groups):
-        bearings = [geo.bearing_deg(st.center_lat, st.center_lng, *h3.cell_to_latlng(c)) for c in g]
-        span = f"{compass(min(bearings))}–{compass(max(bearings))}" if bearings else ""
+        rs = [by_id[x] for x in g]
+        span = f"{compass(spans[i][0])}–{compass(spans[i][1])}"
+        if len(groups) == 1:
+            outline = area
+        else:
+            outline = wedge(center, cuts[i], cuts[(i + 1) % len(groups)], radius).intersection(area)
         u = WorkUnit(study_id=st.id, name=f"Sector {chr(65 + i)} ({span})", color=UNIT_COLORS[i % len(UNIT_COLORS)],
-                     cells=g, status="unassigned")
+                     cells=sorted({r.h3_9 for r in rs}), outline=mapping(outline) if not outline.is_empty else None,
+                     status="unassigned")
         db.add(u)
         db.flush()
-        # one lane = one OSM street within one work unit (segments merged)
+        # one lane = one OSM street within one work unit (its segments merged)
         by_way: dict[int, list[Road]] = defaultdict(list)
-        cellset = set(g)
-        for i2 in range(0, len(g), 900):
-            for r in db.scalars(select(Road).where(Road.h3_9.in_(g[i2:i2 + 900]))):
-                if r.h3_9 in cellset:
-                    by_way[r.osm_id].append(r)
+        for r in rs:
+            by_way[r.osm_id].append(r)
         lane_m, n = 0.0, 0
-        for osm_id, segs in by_way.items():
-            segs.sort(key=lambda r: r.seg)
-            length = sum(r.length_m for r in segs)
-            if length < 40:  # slivers where a street just clips a cell edge
+        for osm_id, ws in by_way.items():
+            ws.sort(key=lambda r: r.seg)
+            length = sum(r.length_m for r in ws)
+            if length < 40:  # slivers where a street just clips the catchment edge
                 continue
-            db.add(SurveyLane(study_id=st.id, work_unit_id=u.id, road_id=segs[0].id,
-                              name=segs[0].name, highway=segs[0].highway,
-                              coords=[r.coords for r in segs], length_m=round(length, 1), h3_9=segs[0].h3_9))
+            db.add(SurveyLane(study_id=st.id, work_unit_id=u.id, road_id=ws[0].id,
+                              name=ws[0].name, highway=ws[0].highway,
+                              coords=[r.coords for r in ws], length_m=round(length, 1), h3_9=ws[0].h3_9))
             lane_m += length
             n += 1
         u.lane_count, u.lane_m = n, round(lane_m, 1)

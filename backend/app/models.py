@@ -359,6 +359,7 @@ class WorkUnit(Base):
     name: Mapped[str] = mapped_column(String(60))
     color: Mapped[str] = mapped_column(String(10))
     cells: Mapped[list] = mapped_column(JSON)
+    outline: Mapped[dict | None] = mapped_column(JSON)  # convex hull of the unit's lanes (display)
     assignee_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"))
     status: Mapped[str] = mapped_column(String(20), default="unassigned")  # unassigned|assigned|in_progress|done
     lane_count: Mapped[int] = mapped_column(Integer, default=0)

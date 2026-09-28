@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { Camera, Check, ChevronLeft, ChevronRight, CloudOff, Crosshair, ImagePlus, LocateFixed, MapPin, Trash2, TriangleAlert } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { MapView, Marker } from '../components/Map'
+import { FitBounds, MapView, Marker } from '../components/Map'
 import { EMPTY_FORM, PropertyFields, formToPayload, type PropertyForm } from '../components/PropertyFields'
 import { ErrorBox, Spinner } from '../components/ui'
 import { ApiError, api, errorText, get, post } from '../lib/api'
@@ -180,6 +180,7 @@ export default function NewProperty() {
                   <MapPin className="h-10 w-10 fill-savo-600 text-white drop-shadow-lg" />
                 </Marker>
               )}
+              {!locOk && mission && <FitBounds points={[[mission.lng, mission.lat]]} maxZoom={16} />}
               {d.device_lat != null && <Marker lng={d.device_lng!} lat={d.device_lat!}><div className="h-4 w-4 rounded-full border-2 border-white bg-sky-500 shadow" /></Marker>}
             </MapView>
             <div className="pointer-events-none absolute left-2 top-2 rounded-lg bg-white/95 px-2 py-1 text-xs text-slate-600 shadow">
