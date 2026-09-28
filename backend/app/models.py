@@ -117,6 +117,13 @@ class CellStat(Base):
     poi_counts: Mapped[dict] = mapped_column(JSON, default=dict)
 
 
+class BaselineMeta(Base):
+    """City-wide reference distributions (sorted samples) used to turn raw metrics into percentiles."""
+    __tablename__ = "baseline_meta"
+    key: Mapped[str] = mapped_column(String(60), primary_key=True)
+    value: Mapped[dict | list] = mapped_column(JSON)
+
+
 class OpportunityCell(Base):
     """City-wide opportunity score per H3 res-8 cell (bonus: opportunity map)."""
     __tablename__ = "opportunity_cells"

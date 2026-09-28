@@ -1,0 +1,758 @@
+{
+ "600001": {
+  "lat": 13.0832432,
+  "lng": 80.2705671,
+  "name": "Zone 5 Royapuram",
+  "source": "Nominatim postcode centroid"
+ },
+ "600002": {
+  "lat": 13.0337525,
+  "lng": 80.2547308,
+  "name": "Zone 9 Teynampet",
+  "source": "Nominatim postcode centroid"
+ },
+ "600003": {
+  "lat": 13.0768927,
+  "lng": 80.268303,
+  "name": "Zone 5 Royapuram",
+  "source": "Nominatim postcode centroid"
+ },
+ "600004": {
+  "lat": 13.0381133,
+  "lng": 80.2654185,
+  "name": "Zone 9 Teynampet",
+  "source": "Nominatim postcode centroid"
+ },
+ "600009": {
+  "lat": 13.0781538,
+  "lng": 80.2860799,
+  "name": "Zone 5 Royapuram",
+  "source": "Nominatim postcode centroid"
+ },
+ "600010": {
+  "lat": 13.0815366,
+  "lng": 80.2379495,
+  "name": "Zone 8 Anna Nagar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600011": {
+  "lat": 13.110119,
+  "lng": 80.2437585,
+  "name": "Zone 6 Thiru. Vi. Ka. Nagar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600012": {
+  "lat": 12.8829046,
+  "lng": 80.0173239,
+  "name": "600012",
+  "source": "Nominatim postcode centroid"
+ },
+ "600014": {
+  "lat": 13.0544176,
+  "lng": 80.2659467,
+  "name": "Zone 9 Teynampet",
+  "source": "Nominatim postcode centroid"
+ },
+ "600015": {
+  "lat": 13.0213726,
+  "lng": 80.22142,
+  "name": "Zone 10 Kodambakkam",
+  "source": "Nominatim postcode centroid"
+ },
+ "600016": {
+  "lat": 13.0074821,
+  "lng": 80.194172,
+  "name": "600016",
+  "source": "Nominatim postcode centroid"
+ },
+ "600017": {
+  "lat": 13.0426493,
+  "lng": 80.2349163,
+  "name": "Zone 10 Kodambakkam",
+  "source": "Nominatim postcode centroid"
+ },
+ "600018": {
+  "lat": 13.0364219,
+  "lng": 80.2544996,
+  "name": "Zone 9 Teynampet",
+  "source": "Nominatim postcode centroid"
+ },
+ "600019": {
+  "lat": 13.1656816,
+  "lng": 80.2952964,
+  "name": "Zone 1 Tiruvottiyur",
+  "source": "Nominatim postcode centroid"
+ },
+ "600020": {
+  "lat": 13.0002441,
+  "lng": 80.2518972,
+  "name": "Zone 13 Adyar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600021": {
+  "lat": 13.1104226,
+  "lng": 80.2808607,
+  "name": "Zone 5 Royapuram",
+  "source": "Nominatim postcode centroid"
+ },
+ "600022": {
+  "lat": 13.0259813,
+  "lng": 80.2317635,
+  "name": "Zone 13 Adyar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600023": {
+  "lat": 13.0982768,
+  "lng": 80.236981,
+  "name": "Zone 8 Anna Nagar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600024": {
+  "lat": 13.0510822,
+  "lng": 80.2244831,
+  "name": "Zone 10 Kodambakkam",
+  "source": "Nominatim postcode centroid"
+ },
+ "600025": {
+  "lat": 13.0122469,
+  "lng": 80.2347814,
+  "name": "Zone 13 Adyar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600026": {
+  "lat": 13.0487847,
+  "lng": 80.2069789,
+  "name": "Zone 10 Kodambakkam",
+  "source": "Nominatim postcode centroid"
+ },
+ "600027": {
+  "lat": 12.9868947,
+  "lng": 80.1667576,
+  "name": "Ward 159",
+  "source": "Nominatim postcode centroid"
+ },
+ "600028": {
+  "lat": 13.0254664,
+  "lng": 80.2619427,
+  "name": "Zone 9 Teynampet",
+  "source": "Nominatim postcode centroid"
+ },
+ "600029": {
+  "lat": 13.071678,
+  "lng": 80.2231326,
+  "name": "Zone 8 Anna Nagar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600030": {
+  "lat": 13.0772428,
+  "lng": 80.2279955,
+  "name": "Zone 8 Anna Nagar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600031": {
+  "lat": 12.9698377,
+  "lng": 80.1929392,
+  "name": "Zone 14 Perungudi",
+  "source": "Nominatim postcode centroid"
+ },
+ "600032": {
+  "lat": 13.015293,
+  "lng": 80.2101991,
+  "name": "Zone 13 Adyar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600033": {
+  "lat": 13.0353817,
+  "lng": 80.2215228,
+  "name": "Zone 10 Kodambakkam",
+  "source": "Nominatim postcode centroid"
+ },
+ "600034": {
+  "lat": 13.0579014,
+  "lng": 80.2434001,
+  "name": "Zone 9 Teynampet",
+  "source": "Nominatim postcode centroid"
+ },
+ "600035": {
+  "lat": 13.0295043,
+  "lng": 80.2402893,
+  "name": "Zone 9 Teynampet",
+  "source": "Nominatim postcode centroid"
+ },
+ "600036": {
+  "lat": 12.9914749,
+  "lng": 80.23551,
+  "name": "Zone 13 Adyar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600037": {
+  "lat": 13.0826724,
+  "lng": 80.1716788,
+  "name": "Ward 91",
+  "source": "Nominatim postcode centroid"
+ },
+ "600038": {
+  "lat": 13.1004324,
+  "lng": 80.2087325,
+  "name": "Zone 8 Anna Nagar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600039": {
+  "lat": 13.1202396,
+  "lng": 80.2511378,
+  "name": "Zone 4 Tondiarpet",
+  "source": "Nominatim postcode centroid"
+ },
+ "600040": {
+  "lat": 13.0854193,
+  "lng": 80.205946,
+  "name": "Zone 8 Anna Nagar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600041": {
+  "lat": 12.9801533,
+  "lng": 80.2576522,
+  "name": "Zone 13 Adyar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600042": {
+  "lat": 12.9814799,
+  "lng": 80.2190766,
+  "name": "Velachery",
+  "source": "Nominatim postcode centroid"
+ },
+ "600043": {
+  "lat": 12.9711876,
+  "lng": 80.1493293,
+  "name": "600043",
+  "source": "Nominatim postcode centroid"
+ },
+ "600044": {
+  "lat": 12.9541757,
+  "lng": 80.138501,
+  "name": "600044",
+  "source": "Nominatim postcode centroid"
+ },
+ "600045": {
+  "lat": 12.9289079,
+  "lng": 80.1144082,
+  "name": "600045",
+  "source": "Nominatim postcode centroid"
+ },
+ "600047": {
+  "lat": 12.9394619,
+  "lng": 80.1418194,
+  "name": "600047",
+  "source": "Nominatim postcode centroid"
+ },
+ "600048": {
+  "lat": 12.9209063,
+  "lng": 80.1191065,
+  "name": "600048",
+  "source": "Nominatim postcode centroid"
+ },
+ "600049": {
+  "lat": 13.1062106,
+  "lng": 80.2065056,
+  "name": "Zone 8 Anna Nagar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600050": {
+  "lat": 13.0945728,
+  "lng": 80.183748,
+  "name": "Ward 87",
+  "source": "Nominatim postcode centroid"
+ },
+ "600051": {
+  "lat": 13.1583183,
+  "lng": 80.2503172,
+  "name": "Zone 3 Madhavaram",
+  "source": "Nominatim postcode centroid"
+ },
+ "600052": {
+  "lat": 13.2014549,
+  "lng": 80.1747284,
+  "name": "600052",
+  "source": "Nominatim postcode centroid"
+ },
+ "600053": {
+  "lat": 13.1189613,
+  "lng": 80.1512383,
+  "name": "Ward 81",
+  "source": "Nominatim postcode centroid"
+ },
+ "600054": {
+  "lat": 13.1205303,
+  "lng": 80.1080436,
+  "name": "600054",
+  "source": "Nominatim postcode centroid"
+ },
+ "600055": {
+  "lat": 13.1845331,
+  "lng": 80.0608495,
+  "name": "600055",
+  "source": "Nominatim postcode centroid"
+ },
+ "600056": {
+  "lat": 13.0574978,
+  "lng": 80.1216823,
+  "name": "600056",
+  "source": "Nominatim postcode centroid"
+ },
+ "600057": {
+  "lat": 13.1946575,
+  "lng": 80.308739,
+  "name": "Zone 1 Tiruvottiyur",
+  "source": "Nominatim postcode centroid"
+ },
+ "600058": {
+  "lat": 13.0954631,
+  "lng": 80.1596,
+  "name": "Ward 86",
+  "source": "Nominatim postcode centroid"
+ },
+ "600059": {
+  "lat": 12.9273656,
+  "lng": 80.1299653,
+  "name": "600059",
+  "source": "Nominatim postcode centroid"
+ },
+ "600060": {
+  "lat": 13.1149952,
+  "lng": 80.2235719,
+  "name": "Zone 6 Thiru. Vi. Ka. Nagar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600061": {
+  "lat": 12.9790431,
+  "lng": 80.1890308,
+  "name": "Ward 167",
+  "source": "Nominatim postcode centroid"
+ },
+ "600062": {
+  "lat": 13.1393134,
+  "lng": 80.1257409,
+  "name": "600062",
+  "source": "Nominatim postcode centroid"
+ },
+ "600063": {
+  "lat": 12.9121582,
+  "lng": 80.0951857,
+  "name": "600063",
+  "source": "Nominatim postcode centroid"
+ },
+ "600064": {
+  "lat": 12.9370662,
+  "lng": 80.1426424,
+  "name": "600064",
+  "source": "Nominatim postcode centroid"
+ },
+ "600065": {
+  "lat": 13.1519785,
+  "lng": 80.080629,
+  "name": "600065",
+  "source": "Nominatim postcode centroid"
+ },
+ "600066": {
+  "lat": 13.1624323,
+  "lng": 80.1988465,
+  "name": "Ward 22",
+  "source": "Nominatim postcode centroid"
+ },
+ "600067": {
+  "lat": 13.2391744,
+  "lng": 80.1856434,
+  "name": "600067",
+  "source": "Nominatim postcode centroid"
+ },
+ "600068": {
+  "lat": 13.1651145,
+  "lng": 80.2562268,
+  "name": "Zone 2 Manali",
+  "source": "Nominatim postcode centroid"
+ },
+ "600069": {
+  "lat": 13.0001119,
+  "lng": 80.0967722,
+  "name": "600069",
+  "source": "Nominatim postcode centroid"
+ },
+ "600070": {
+  "lat": 12.9783631,
+  "lng": 80.1283322,
+  "name": "600070",
+  "source": "Nominatim postcode centroid"
+ },
+ "600071": {
+  "lat": 13.1050761,
+  "lng": 80.1000895,
+  "name": "600071",
+  "source": "Nominatim postcode centroid"
+ },
+ "600072": {
+  "lat": 13.1184413,
+  "lng": 80.0657443,
+  "name": "600072",
+  "source": "Nominatim postcode centroid"
+ },
+ "600073": {
+  "lat": 12.9134526,
+  "lng": 80.1505826,
+  "name": "600073",
+  "source": "Nominatim postcode centroid"
+ },
+ "600074": {
+  "lat": 12.9771126,
+  "lng": 80.1376089,
+  "name": "600074",
+  "source": "Nominatim postcode centroid"
+ },
+ "600075": {
+  "lat": 12.9727641,
+  "lng": 80.1375266,
+  "name": "600075",
+  "source": "Nominatim postcode centroid"
+ },
+ "600077": {
+  "lat": 13.0720146,
+  "lng": 80.1252327,
+  "name": "600077",
+  "source": "Nominatim postcode centroid"
+ },
+ "600078": {
+  "lat": 13.0404278,
+  "lng": 80.1993064,
+  "name": "Zone 10 Kodambakkam",
+  "source": "Nominatim postcode centroid"
+ },
+ "600079": {
+  "lat": 13.093579,
+  "lng": 80.2790093,
+  "name": "Zone 5 Royapuram",
+  "source": "Nominatim postcode centroid"
+ },
+ "600080": {
+  "lat": 13.1172497,
+  "lng": 80.1902733,
+  "name": "Zone 7 Ambattur",
+  "source": "Nominatim postcode centroid"
+ },
+ "600081": {
+  "lat": 13.1304796,
+  "lng": 80.2823785,
+  "name": "Zone 4 Tondiarpet",
+  "source": "Nominatim postcode centroid"
+ },
+ "600082": {
+  "lat": 13.1162832,
+  "lng": 80.2257796,
+  "name": "Zone 6 Thiru. Vi. Ka. Nagar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600083": {
+  "lat": 13.0349593,
+  "lng": 80.2111426,
+  "name": "Zone 10 Kodambakkam",
+  "source": "Nominatim postcode centroid"
+ },
+ "600084": {
+  "lat": 13.0806778,
+  "lng": 80.2544866,
+  "name": "Zone 8 Anna Nagar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600085": {
+  "lat": 13.0191143,
+  "lng": 80.2439829,
+  "name": "Zone 13 Adyar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600086": {
+  "lat": 13.0476174,
+  "lng": 80.2560499,
+  "name": "Zone 9 Teynampet",
+  "source": "Nominatim postcode centroid"
+ },
+ "600087": {
+  "lat": 13.0442649,
+  "lng": 80.1815638,
+  "name": "Zone 11 Valasaravakkam",
+  "source": "Nominatim postcode centroid"
+ },
+ "600088": {
+  "lat": 12.9890457,
+  "lng": 80.2030403,
+  "name": "Ward 165",
+  "source": "Nominatim postcode centroid"
+ },
+ "600089": {
+  "lat": 13.0248051,
+  "lng": 80.1818443,
+  "name": "Zone 11 Valasaravakkam",
+  "source": "Nominatim postcode centroid"
+ },
+ "600090": {
+  "lat": 12.9959579,
+  "lng": 80.2657292,
+  "name": "Zone 13 Adyar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600091": {
+  "lat": 12.9679146,
+  "lng": 80.1955537,
+  "name": "Zone 14 Perungudi",
+  "source": "Nominatim postcode centroid"
+ },
+ "600092": {
+  "lat": 12.9700615,
+  "lng": 80.1380812,
+  "name": "600092",
+  "source": "Nominatim postcode centroid"
+ },
+ "600093": {
+  "lat": 13.0511863,
+  "lng": 80.2000917,
+  "name": "Zone 10 Kodambakkam",
+  "source": "Nominatim postcode centroid"
+ },
+ "600094": {
+  "lat": 13.0632468,
+  "lng": 80.2237976,
+  "name": "Zone 9 Teynampet",
+  "source": "Nominatim postcode centroid"
+ },
+ "600095": {
+  "lat": 13.0623381,
+  "lng": 80.1663565,
+  "name": "Zone 11 Valasaravakkam",
+  "source": "Nominatim postcode centroid"
+ },
+ "600096": {
+  "lat": 12.9593863,
+  "lng": 80.2427584,
+  "name": "Zone 14 Perungudi",
+  "source": "Nominatim postcode centroid"
+ },
+ "600097": {
+  "lat": 12.8677939,
+  "lng": 80.2095688,
+  "name": "600097",
+  "source": "Nominatim postcode centroid"
+ },
+ "600099": {
+  "lat": 13.1270277,
+  "lng": 80.2127472,
+  "name": "Zone 6 Thiru. Vi. Ka. Nagar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600100": {
+  "lat": 12.9224881,
+  "lng": 80.197011,
+  "name": "600100",
+  "source": "Nominatim postcode centroid"
+ },
+ "600101": {
+  "lat": 13.091242,
+  "lng": 80.1930301,
+  "name": "Zone 7 Ambattur",
+  "source": "Nominatim postcode centroid"
+ },
+ "600102": {
+  "lat": 13.0876121,
+  "lng": 80.2234881,
+  "name": "Zone 8 Anna Nagar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600103": {
+  "lat": 13.2041971,
+  "lng": 80.2682454,
+  "name": "600103",
+  "source": "Nominatim postcode centroid"
+ },
+ "600105": {
+  "lat": 13.0743875,
+  "lng": 80.2006671,
+  "name": "Zone 10 Kodambakkam",
+  "source": "Nominatim postcode centroid"
+ },
+ "600106": {
+  "lat": 13.0719757,
+  "lng": 80.213126,
+  "name": "Zone 8 Anna Nagar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600107": {
+  "lat": 13.0639346,
+  "lng": 80.201993,
+  "name": "Zone 10 Kodambakkam",
+  "source": "Nominatim postcode centroid"
+ },
+ "600109": {
+  "lat": 13.1197361,
+  "lng": 80.1176495,
+  "name": "600109",
+  "source": "Nominatim postcode centroid"
+ },
+ "600110": {
+  "lat": 13.1353348,
+  "lng": 80.2198209,
+  "name": "Zone 3 Madhavaram",
+  "source": "Nominatim postcode centroid"
+ },
+ "600112": {
+  "lat": 13.0603658,
+  "lng": 80.2618788,
+  "name": "Zone 9 Teynampet",
+  "source": "Nominatim postcode centroid"
+ },
+ "600113": {
+  "lat": 12.9929205,
+  "lng": 80.2436727,
+  "name": "Zone 13 Adyar",
+  "source": "Nominatim postcode centroid"
+ },
+ "600114": {
+  "lat": 12.9858602,
+  "lng": 80.184359,
+  "name": "Ward 166",
+  "source": "Nominatim postcode centroid"
+ },
+ "600115": {
+  "lat": 12.9498284,
+  "lng": 80.2530742,
+  "name": "Zone 15 Sholinganallur",
+  "source": "Nominatim postcode centroid"
+ },
+ "600116": {
+  "lat": 13.0326734,
+  "lng": 80.1604809,
+  "name": "Zone 11 Valasaravakkam",
+  "source": "Nominatim postcode centroid"
+ },
+ "600117": {
+  "lat": 12.9468986,
+  "lng": 80.1824349,
+  "name": "600117",
+  "source": "Nominatim postcode centroid"
+ },
+ "600118": {
+  "lat": 13.1263797,
+  "lng": 80.2456919,
+  "name": "Zone 4 Tondiarpet",
+  "source": "Nominatim postcode centroid"
+ },
+ "600119": {
+  "lat": 12.8959264,
+  "lng": 80.2272621,
+  "name": "Zone 15 Sholinganallur",
+  "source": "Nominatim postcode centroid"
+ },
+ "600120": {
+  "lat": 13.2576358,
+  "lng": 80.2819037,
+  "name": "600120",
+  "source": "Nominatim postcode centroid"
+ },
+ "600122": {
+  "lat": 13.0144147,
+  "lng": 80.1324954,
+  "name": "600122",
+  "source": "Nominatim postcode centroid"
+ },
+ "600124": {
+  "lat": 13.0615518,
+  "lng": 80.0368419,
+  "name": "600124",
+  "source": "Nominatim postcode centroid"
+ },
+ "600125": {
+  "lat": 13.0207592,
+  "lng": 80.1637152,
+  "name": "Zone 12 Alandur",
+  "source": "Nominatim postcode centroid"
+ },
+ "600126": {
+  "lat": 12.9014165,
+  "lng": 80.1599034,
+  "name": "600126",
+  "source": "Nominatim postcode centroid"
+ },
+ "600127": {
+  "lat": 12.8421284,
+  "lng": 80.1486006,
+  "name": "600127",
+  "source": "Nominatim postcode centroid"
+ },
+ "600128": {
+  "lat": 13.0091536,
+  "lng": 80.1353144,
+  "name": "600128",
+  "source": "Nominatim postcode centroid"
+ },
+ "600129": {
+  "lat": 12.9437536,
+  "lng": 80.1830778,
+  "name": "600129",
+  "source": "Nominatim postcode centroid"
+ },
+ "600130": {
+  "lat": 12.8540251,
+  "lng": 80.2142721,
+  "name": "600130",
+  "source": "Nominatim postcode centroid"
+ },
+ "601204": {
+  "lat": 13.2933465,
+  "lng": 80.1867271,
+  "name": "601204",
+  "source": "Nominatim postcode centroid"
+ },
+ "601301": {
+  "lat": 12.8795758,
+  "lng": 80.0165269,
+  "name": "601301",
+  "source": "Nominatim postcode centroid"
+ },
+ "602024": {
+  "lat": 13.1254837,
+  "lng": 80.0133663,
+  "name": "602024",
+  "source": "Nominatim postcode centroid"
+ },
+ "603103": {
+  "lat": 12.8195062,
+  "lng": 80.2203541,
+  "name": "603103",
+  "source": "Nominatim postcode centroid"
+ },
+ "603202": {
+  "lat": 12.8409741,
+  "lng": 80.0572939,
+  "name": "603202",
+  "source": "Nominatim postcode centroid"
+ },
+ "603203": {
+  "lat": 12.8182355,
+  "lng": 80.0399948,
+  "name": "603203",
+  "source": "Nominatim postcode centroid"
+ },
+ "603209": {
+  "lat": 12.7959866,
+  "lng": 80.0283997,
+  "name": "603209",
+  "source": "Nominatim postcode centroid"
+ },
+ "603210": {
+  "lat": 12.8727595,
+  "lng": 80.0823574,
+  "name": "603210",
+  "source": "Nominatim postcode centroid"
+ },
+ "603211": {
+  "lat": 12.8672847,
+  "lng": 80.0699207,
+  "name": "603211",
+  "source": "Nominatim postcode centroid"
+ }
+}
