@@ -24,7 +24,9 @@ export default function Assistant() {
     mutationFn: (question: string) => post('/api/assistant/ask', { question }),
     onSuccess: (r) => setMsgs((m) => [...m, { role: 'bot', text: r.answer, meta: r.meta, sources: r.sources, follow: r.follow_ups }]),
   })
-  useEffect(() => end.current?.scrollIntoView({ behavior: 'smooth' }), [msgs, ask.isPending])
+  useEffect(() => {
+    end.current?.scrollIntoView({ behavior: 'smooth' }) // newer browsers return a Promise here — never return it
+  }, [msgs, ask.isPending])
 
   function send(text: string) {
     if (!text.trim() || ask.isPending) return

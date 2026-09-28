@@ -15,7 +15,9 @@ export function MissionModal({ open, onClose, preset }: {
   const qc = useQueryClient()
   const execs = useQuery({ queryKey: ['users', 'bd_exec'], queryFn: () => get('/api/users?role=bd_exec'), enabled: open })
   const [form, setForm] = useState({ title: preset.title, brief: preset.brief || '', assignee_id: '', radius_m: 600, due_date: '' })
-  useEffect(() => setForm((f) => ({ ...f, title: preset.title, brief: preset.brief || '' })), [preset.title, preset.brief])
+  useEffect(() => {
+    setForm((f) => ({ ...f, title: preset.title, brief: preset.brief || '' }))
+  }, [preset.title, preset.brief])
   const m = useMutation({
     mutationFn: () => post('/api/missions', { ...preset, ...form, assignee_id: Number(form.assignee_id), due_date: form.due_date || null }),
     onSuccess: () => {

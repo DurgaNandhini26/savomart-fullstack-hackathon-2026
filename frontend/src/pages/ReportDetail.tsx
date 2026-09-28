@@ -278,7 +278,7 @@ export function GroundTruth({ g }: { g: any }) {
       <div className="rounded-2xl bg-teal-50 p-3">
         <div className="text-xs font-bold uppercase text-teal-700">Competition on the ground</div>
         <div className="text-2xl font-extrabold">{g.kiranas_observed + g.supermarkets_observed}</div>
-        <div className="text-xs text-slate-500">{g.kiranas_observed} kiranas · {g.supermarkets_observed} supermarkets · {fmtInt(g.households_per_outlet)} households per outlet</div>
+        <div className="text-xs text-slate-500">{g.kiranas_observed} kirana{g.kiranas_observed === 1 ? '' : 's'} · {g.supermarkets_observed} supermarket{g.supermarkets_observed === 1 ? '' : 's'} · {fmtInt(g.households_per_outlet)} households per outlet</div>
       </div>
       <div className="rounded-2xl bg-teal-50 p-3">
         <div className="text-xs font-bold uppercase text-teal-700">Socio-economic mix</div>

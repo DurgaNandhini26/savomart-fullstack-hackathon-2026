@@ -44,6 +44,10 @@ def rent_benchmark(lat: float, lng: float, on_major_road: bool) -> float:
     return round(base * (1.15 if on_major_road else 1.0), 1)
 
 
+def _n(k: int, word: str) -> str:
+    return f"{k} {word}{'' if k == 1 else 's'}"
+
+
 def _clip(x: float) -> float:
     return max(0.0, min(100.0, x))
 
@@ -198,7 +202,7 @@ def evaluate(db: Session, prop: Property) -> dict:
         affl = _clip((gi.get("sec_ab_share") or 0) * 150)
         catch = 0.4 * gt_demand + 0.3 * gt_gap + 0.2 * _clip((gi.get("footfall_index") or 1) / 3 * 100) + 0.1 * affl
         insights.append(f"Ground-truthed by catchment study {gt.code}: ~{gi.get('households_estimated', 0):,} households, "
-                        f"{gi.get('kiranas_observed', 0)} kiranas and {gi.get('supermarkets_observed', 0)} supermarkets observed.")
+                        f"{_n(gi.get('kiranas_observed', 0), 'kirana')} and {_n(gi.get('supermarkets_observed', 0), 'supermarket')} observed.")
         if (gi.get("model_households_delta_pct") or 0) < -25:
             risks.append(f"Survey found {abs(gi['model_households_delta_pct'])}% fewer households than our model estimated.")
 
@@ -221,7 +225,7 @@ def evaluate(db: Session, prop: Property) -> dict:
     elif near and 2 <= near["distance_km"] <= 6:
         insights.append(f"{near['distance_km']} km from Savomart {near['name']}: new catchment inside the supply cluster.")
     if m["supermarkets"] >= 4:
-        risks.append(f"{m['supermarkets']} supermarkets already within {CATCHMENT_M} m.")
+        risks.append(f"{m['supermarkets']} supermarkets already within {CATCHMENT_M} m (OSM).")
     insights += s_ins + c_ins
     risks += s_risk + c_risk
     for w in prop.data_quality or []:

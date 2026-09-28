@@ -169,7 +169,9 @@ function LaneSheet({ lane, unitId, onClose, onSaved }: { lane: any; unitId: numb
   const [f, setF, clear] = useDraft<LaneForm>(`lane-${lane.id}`, existing ? { ...EMPTY, ...existing } : EMPTY)
   const set = (p: Partial<LaneForm>) => setF((x) => ({ ...x, ...p }))
   const [page, setPage] = useState(0)
-  useEffect(() => setPage(0), [lane.id])
+  useEffect(() => {
+    setPage(0)
+  }, [lane.id])
 
   function save(status: 'done' | 'inaccessible') {
     const cu = uuid()

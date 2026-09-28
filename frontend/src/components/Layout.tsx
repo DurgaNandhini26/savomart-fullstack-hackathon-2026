@@ -5,7 +5,8 @@ import {
   Route, Users,
 } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
-import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { ErrorBoundary } from './ErrorBoundary'
 import { get, post } from '../lib/api'
 import { ROLE_LABEL, useAuth, type Role } from '../lib/auth'
 import { ago } from '../lib/format'
@@ -132,6 +133,7 @@ function SyncPill() {
 export function Layout() {
   const { user, logout } = useAuth()
   const nav = useNavigate()
+  const loc = useLocation()
   if (!user) return null
   const items = NAV[user.role]
   return (
@@ -177,7 +179,9 @@ export function Layout() {
           </div>
         </header>
         <main className="min-h-0 flex-1 overflow-y-auto pb-20 md:pb-0">
-          <Outlet />
+          <ErrorBoundary resetKey={loc.pathname}>
+            <Outlet />
+          </ErrorBoundary>
         </main>
         {/* mobile bottom nav */}
         <nav className="fixed inset-x-0 bottom-0 z-30 flex border-t border-slate-200 bg-white pb-[env(safe-area-inset-bottom)] md:hidden">
