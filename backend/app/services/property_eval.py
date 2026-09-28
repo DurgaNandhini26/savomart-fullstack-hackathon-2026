@@ -152,13 +152,22 @@ def commercials_score(p: Property, benchmark: float) -> tuple[float, list[str], 
 
 
 def ground_truth_for(db: Session, prop: Property) -> CatchmentStudy | None:
-    """Latest completed catchment study covering this property (own or reused)."""
+    """Best completed catchment study for this property.
+
+    Its own study wins; otherwise the study whose catchment is best centred on the property
+    (a reused study drawn around a neighbour is a weaker proxy than one drawn around you).
+    """
     c9 = prop.h3_9
-    for st in db.scalars(select(CatchmentStudy).where(CatchmentStudy.status.in_(["completed", "reused"]))
-                         .order_by(CatchmentStudy.completed_at.desc().nulls_last())):
-        if st.insights and c9 in set(st.requested_cells):
-            return st
-    return None
+    best = None
+    for st in db.scalars(select(CatchmentStudy).where(CatchmentStudy.status.in_(["completed", "reused"]))):
+        if not st.insights or c9 not in set(st.requested_cells):
+            continue
+        own = st.property_id == prop.id
+        dist = geo.haversine_m(prop.lat, prop.lng, st.center_lat, st.center_lng)
+        key = (0 if own else 1, dist, -(st.completed_at or st.created_at).timestamp())
+        if best is None or key < best[0]:
+            best = (key, st)
+    return best[1] if best else None
 
 
 def evaluate(db: Session, prop: Property) -> dict:
@@ -179,9 +188,13 @@ def evaluate(db: Session, prop: Property) -> dict:
                                            "footfall_index", "kiranas_observed", "supermarkets_observed",
                                            "coverage", "model_households_delta_pct")}
         # ground truth replaces the modelled demand/gap where we have it
-        hh_po = gi.get("households_per_outlet") or 0
-        gt_gap = _clip(hh_po / 250 * 100)  # ~250 households per outlet ≈ well served
-        gt_demand = _clip((gi.get("households_estimated") or 0) / 6000 * 100)
+        # competition-weighted outlets: a supermarket competes ~5x harder than a kirana for our basket
+        outlets_w = (gi.get("kiranas_observed") or 0) + 5 * (gi.get("supermarkets_observed") or 0)
+        cov = gi.get("coverage") or 1
+        hh_po_w = (gi.get("households_estimated") or 0) / max(outlets_w / cov, 1)
+        gt_gap = _clip((hh_po_w - 20) / (150 - 20) * 100)
+        hh_km2 = (gi.get("households_estimated") or 0) / max(gi.get("area_km2") or 1, 0.1)
+        gt_demand = _clip(hh_km2 / 8000 * 100)  # ~8,000 households/km² ≈ Chennai's densest wards
         affl = _clip((gi.get("sec_ab_share") or 0) * 150)
         catch = 0.4 * gt_demand + 0.3 * gt_gap + 0.2 * _clip((gi.get("footfall_index") or 1) / 3 * 100) + 0.1 * affl
         insights.append(f"Ground-truthed by catchment study {gt.code}: ~{gi.get('households_estimated', 0):,} households, "
@@ -222,15 +235,20 @@ def evaluate(db: Session, prop: Property) -> dict:
         "network": {"label": "Network fit", "score": net, "weight": WEIGHTS["network"]},
     }
     total = round(sum(p["score"] * p["weight"] for p in pillars.values()), 1)
+    # deal-breakers: a great catchment can't rescue a first-floor store or a cannibalising location
     critical = [r for r in risks if any(k in r for k in ("cannibalisation", "floor —", "above the locality"))]
     if prop.carpet_area_sqft and prop.carpet_area_sqft < 800:
-        critical.append("too small")
-    rec = "go" if total >= 68 and not critical else "consider" if total >= 50 else "no_go"
-    if rec == "go" and len(critical) >= 1:
-        rec = "consider"
+        critical.append(f"{int(prop.carpet_area_sqft)} sq ft is too small for the format")
+    if critical:
+        cap = 64 - 8 * (len(critical) - 1)
+        if total > cap:
+            risks.insert(0, f"Score capped at {cap} (from {total}) by deal-breaker{'s' if len(critical) > 1 else ''}: "
+                            + "; ".join(c.split(' — ')[0].rstrip('.') for c in critical[:2]) + ".")
+            total = float(cap)
+    rec = "go" if total >= 68 else "consider" if total >= 50 else "no_go"
 
     facts = {
-        "property": prop.title, "score": total, "recommendation": rec,
+        "property": prop.title, "score": total, "recommendation": rec, "stage": prop.stage,
         "pillars": {k: v["score"] for k, v in pillars.items()},
         "catchment_radius_m": CATCHMENT_M, "residents_est": m["population"], "households_est": m["households"],
         "grocery_outlets_mapped": m["grocery_outlets"], "supermarkets_mapped": m["supermarkets"],

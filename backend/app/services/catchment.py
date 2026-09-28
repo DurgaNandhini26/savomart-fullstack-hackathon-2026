@@ -251,6 +251,7 @@ def rollup(db: Session, st: CatchmentStudy) -> dict:
     model = F.aggregate(db, list(req))
     model_hh = round(model.sums["est_households"])
     return {
+        "area_km2": round(geo.cells_area_km2(req), 2),
         "lanes_total": len(lanes), "lanes_surveyed": len(surveyed), "lanes_inaccessible": len(inaccessible),
         "lane_km_total": round(total_m / 1000, 2), "lane_km_surveyed": round(surveyed_m / 1000, 2),
         "coverage": round(surveyed_m / total_m, 2),

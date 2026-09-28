@@ -16,7 +16,7 @@ from ..serializers import iso, lane_feature, study_summary, unit_dict
 from ..services import catchment as C
 from ..services import pipeline as P
 from ..services.notify import notify, role_users
-from ..services.property_eval import new_evaluation
+from ..services.property_eval import ground_truth_for, new_evaluation
 
 router = APIRouter(prefix="/api")
 
@@ -311,7 +311,10 @@ def _propagate(db: Session, st: CatchmentStudy) -> None:
         r = db.get(AreaReport, st.report_id)
         if r:
             r.ground_truth = {"study_id": st.id, "code": st.code, **(st.insights or {})}
-    affected = [p for p in db.scalars(select(Property)) if p.h3_9 in req and p.stage not in ("rejected", "duplicate")]
+    # only properties for which this study is now the best ground truth get re-evaluated
+    affected = [p for p in db.scalars(select(Property))
+                if p.h3_9 in req and p.stage not in ("rejected", "duplicate") and
+                (g := ground_truth_for(db, p)) is not None and g.id == st.id]
     notify(db, [st.requested_by_id], "study", f"Catchment study {st.code} complete",
            f"{len(affected)} propert{'y' if len(affected) == 1 else 'ies'} re-evaluated with ground truth", f"/studies/{st.id}")
     db.commit()

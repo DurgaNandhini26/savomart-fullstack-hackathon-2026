@@ -219,7 +219,7 @@ def run() -> None:
         sd = c.post(f"/api/studies/{st_a['id']}/plan", headers=SM, json={"units": 3}).json()
         for u, who in zip(sd["units"], ["suresh", "divya", "mani"]):
             c.post(f"/api/work-units/{u['id']}/assign", headers=SM, json={"assignee_id": users[who]["id"]})
-        kolathur = {"hh_per_100m": 14, "housing": [5, 3, 3, 1, 1], "sec": [1, 4, 5, 2], "brands": ["More", "Reliance Smart", "Local supermarket"]}
+        kolathur = {"hh_per_100m": 24, "housing": [5, 3, 3, 1, 1], "sec": [1, 4, 5, 2], "brands": ["More", "Reliance Smart", "Local supermarket"]}
         for u, who in zip(sd["units"], ["suresh", "divya", "mani"]):
             wu = c.get(f"/api/work-units/{u['id']}", headers=H(who)).json()
             obs = [{"client_uuid": str(uuid.uuid4()), "lane_id": f["id"],
@@ -229,7 +229,7 @@ def run() -> None:
         wait(f"/api/studies/{st_a['id']}", PM, lambda d: d["status"] == "completed")
         wait(f"/api/properties/{props['kolathur_a']['id']}", PM,
              lambda d: d["evaluation"] and d["evaluation"]["trigger"] == "catchment_study")
-        move("kolathur_a", "negotiation", "Survey confirms ~households and thin modern-trade competition. Negotiate to ₹1.5L.")
+        move("kolathur_a", "negotiation", "Survey confirms dense housing and no supermarket inside the catchment. Negotiate rent down to ₹1.5L.")
 
         # reuse: a second Kolathur property inside the surveyed catchment
         st_c = c.post("/api/studies", headers=PM, json={"target_type": "property", "property_id": props["kolathur_c"]["id"],
@@ -242,7 +242,7 @@ def run() -> None:
         sd = c.post(f"/api/studies/{st_p['id']}/plan", headers=SM, json={"units": 2}).json()
         c.post(f"/api/work-units/{sd['units'][0]['id']}/assign", headers=SM, json={"assignee_id": users["suresh"]["id"]})
         c.post(f"/api/work-units/{sd['units'][1]['id']}/assign", headers=SM, json={"assignee_id": users["divya"]["id"]})
-        porur = {"hh_per_100m": 11, "housing": [3, 5, 2, 2, 1], "sec": [2, 5, 4, 1], "brands": ["Reliance Smart", "More", "DMart"]}
+        porur = {"hh_per_100m": 18, "housing": [3, 5, 2, 2, 1], "sec": [2, 5, 4, 1], "brands": ["Reliance Smart", "More", "DMart"]}
         wu = c.get(f"/api/work-units/{sd['units'][0]['id']}", headers=H("suresh")).json()
         feats = wu["lanes"]["features"]
         obs = [{"client_uuid": str(uuid.uuid4()), "lane_id": f["id"], "captured_at": datetime.now(timezone.utc).isoformat(),

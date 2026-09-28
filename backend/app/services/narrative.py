@@ -115,13 +115,19 @@ def property_template(facts: dict) -> dict:
     rec = {"go": "Recommend progressing", "consider": "Worth a closer look", "no_go": "Not recommended"}[facts["recommendation"]]
     top_ins = facts["insights"][:2]
     top_risk = facts["risks"][:1]
-    return {
-        "headline": f"{rec}: {facts['property']} scores {facts['score']}/100.",
-        "summary": " ".join(top_ins + top_risk),
-        "next_step": {"go": "Schedule a site visit and request a catchment study to confirm demand on the ground.",
-                      "consider": "Ask the executive to verify the flagged items before shortlisting.",
-                      "no_go": "Reject unless the flagged risks can be negotiated away."}[facts["recommendation"]],
-    }
+    stage, gt = facts.get("stage"), facts.get("ground_truth")
+    if stage in ("negotiation", "approved"):
+        nxt = "Close commercials: aim for rent at or below the locality benchmark and a 9+ year lease."
+    elif facts["recommendation"] == "no_go":
+        nxt = "Reject unless the flagged risks can be negotiated away."
+    elif facts["recommendation"] == "consider":
+        nxt = "Ask the executive to verify the flagged items before shortlisting."
+    elif gt:
+        nxt = "Ground truth supports the case — schedule a site visit and move to negotiation."
+    else:
+        nxt = "Schedule a site visit and request a catchment study to confirm demand on the ground."
+    return {"headline": f"{rec}: {facts['property']} scores {facts['score']}/100.",
+            "summary": " ".join(top_ins + top_risk), "next_step": nxt}
 
 
 def property_narrative(facts: dict) -> tuple[dict, dict]:
