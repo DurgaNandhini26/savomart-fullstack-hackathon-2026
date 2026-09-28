@@ -12,7 +12,7 @@ from . import narrative as N
 from . import scoring as S
 from .jobs import handler
 
-HOTSPOT_RING = 2           # res-9 ring => ~600 m walking catchment around a candidate cell
+HOTSPOT_RING = 2           # res-9 ring => ~750 m walking catchment (19 cells, ~2 km²) around a candidate cell
 HOTSPOT_MIN_SEP_M = 800    # hotspots at least this far apart
 HOTSPOT_COUNT = 5
 
@@ -65,9 +65,9 @@ def find_hotspots(db: Session, cells8: list[str], dist: S.Distributions, stores,
         road = db.scalar(select(Road).where(Road.h3_9 == c, Road.name.is_not(None))
                          .order_by(Road.highway.in_(["trunk", "primary", "secondary"]).desc(), Road.length_m.desc()))
         near = m["nearest_stores"][0] if m["nearest_stores"] else None
-        reasons = [f"~{m['population']:,} residents within ~600 m (est.)"]
-        reasons.append(f"{m['grocery_outlets']} grocery outlets mapped within ~600 m"
-                       if m["grocery_outlets"] else "No grocery outlets mapped within ~600 m")
+        reasons = [f"~{m['population']:,} residents within ~750 m (est.)"]
+        reasons.append(f"{m['grocery_outlets']} grocery outlets mapped within ~750 m"
+                       if m["grocery_outlets"] else "No grocery outlets mapped within ~750 m")
         if road:
             reasons.append(f"On/near {road.name} ({road.highway})")
         if m["generators"]:

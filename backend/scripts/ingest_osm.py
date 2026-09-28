@@ -151,8 +151,8 @@ def ingest_places(db) -> None:
     print("-> places")
     b = ",".join(map(str, BBOX))
     ql = f"""[out:json][timeout:120];
-node["place"~"^(suburb|neighbourhood|quarter|town|village|locality)$"]({b});
-out body;"""
+nwr["place"~"^(city|suburb|neighbourhood|quarter|town|village|locality)$"]({b});
+out center tags;"""
     data = query(ql, name="places")
     db.execute(delete(Place).where(Place.kind == "locality"))
     n = 0
@@ -160,15 +160,16 @@ out body;"""
     for el in data.get("elements", []):
         tags = el.get("tags") or {}
         name = tags.get("name:en") or tags.get("name")
-        if not name or not geo.in_chennai(el["lat"], el["lon"]):
+        lat, lon = (el["lat"], el["lon"]) if "lat" in el else (el.get("center", {}).get("lat"), el.get("center", {}).get("lon"))
+        if not name or lat is None or not geo.in_chennai(lat, lon) or name.lower() == "chennai":
             continue
-        key = (name.lower(), round(el["lat"], 3), round(el["lon"], 3))
+        key = (name.lower(), round(lat, 2), round(lon, 2))
         if key in seen:
             continue
         seen.add(key)
         db.add(Place(kind="locality", name=name, place_type=tags.get("place"),
                      pincode=tags.get("postal_code") or tags.get("addr:postcode"),
-                     lat=el["lat"], lng=el["lon"], source="osm"))
+                     lat=lat, lng=lon, source=f"osm {el['type']}"))
         n += 1
     db.add(DataSnapshot(source="osm_places", source_timestamp=osm_timestamp(data), record_count=n))
     db.commit()

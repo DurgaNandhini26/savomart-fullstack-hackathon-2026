@@ -59,6 +59,9 @@ def _llm_narrative(system: str, facts: dict, required: list[str]) -> dict:
 
 # ------------------------------------------------------------------ area
 
+BAND_PHRASE = {"Strong fit": "a strong fit", "Promising": "a promising area", "Marginal": "a marginal fit",
+               "Weak fit": "a weak fit"}
+
 def area_facts(name: str, metrics: dict, scored: dict, hotspots: list[dict], confidence: str) -> dict:
     return {
         "area": name,
@@ -84,14 +87,16 @@ def area_template(facts: dict, scored: dict) -> dict:
     hs = facts["hotspots"]
     near = facts["nearest_savomart"][0] if facts["nearest_savomart"] else None
     return {
-        "headline": f"{facts['area']} is a {facts['band'].lower()} for Savomart (score {facts['fit_score']}/100, "
-                    f"{facts['confidence'].lower()} confidence).",
+        "headline": f"{facts['area']} is {BAND_PHRASE.get(facts['band'], facts['band'])} for Savomart "
+                    f"(score {facts['fit_score']}/100, {facts['confidence'].lower()} confidence).",
         "summary": f"An estimated {facts['estimated_residents']:,} residents live across {facts['area_km2']} km², "
                    f"with {facts['grocery_outlets_mapped']} grocery outlets mapped in OSM "
                    f"(~{facts['residents_per_grocery_outlet']:,} residents per outlet)."
                    + (f" The nearest Savomart is {near['name']} at {near['distance_km']} km." if near else ""),
-        "strengths": [f"{p['label']}: {p['score']} percentile" for p in top],
-        "concerns": [f"{p['label']}: {p['score']} percentile" for p in low],
+        "strengths": [f"{p['label']} scores {p['score']:.0f}/100 — {p['description'][0].lower() + p['description'][1:]}"
+                      for p in top],
+        "concerns": [f"{p['label']} scores only {p['score']:.0f}/100 — {p['description'][0].lower() + p['description'][1:]}"
+                     for p in low if p["score"] < 60] or ["No pillar scores below 60/100."],
         "scouting_advice": (f"Start with hotspot #1 near {hs[0]['near']} — " + "; ".join(hs[0]["reasons"][:2]) + "."
                             if hs else "No clear hotspot stands out; scout along the arterial roads first."),
     }

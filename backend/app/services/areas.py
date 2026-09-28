@@ -14,8 +14,8 @@ from sqlalchemy.orm import Session
 from .. import geo
 from ..models import Place
 
-LOCALITY_TYPES = ["suburb", "neighbourhood", "quarter", "town", "village"]
-MAX_RADIUS_M = {"pincode": 4500, "suburb": 2500, "town": 3000, "village": 1800, "neighbourhood": 1500,
+LOCALITY_TYPES = ["city", "suburb", "neighbourhood", "quarter", "town", "village"]
+MAX_RADIUS_M = {"pincode": 4500, "city": 3000, "suburb": 2500, "town": 3000, "village": 1800, "neighbourhood": 1500,
                 "quarter": 1500, "locality": 1200}
 
 
@@ -97,7 +97,40 @@ def search(db: Session, q: str, limit: int = 12) -> list[dict]:
         rows = db.scalars(select(Place).where(Place.kind == "pincode", Place.pincode.like(f"{q}%"))
                           .order_by(Place.pincode).limit(limit))
     else:
-        rows = db.scalars(select(Place).where(or_(Place.name.ilike(f"{q}%"), Place.name.ilike(f"% {q}%")))
-                          .order_by(Place.kind.desc(), func.length(Place.name)).limit(limit))
+        rows = list(db.scalars(select(Place).where(or_(Place.name.ilike(f"{q}%"), Place.name.ilike(f"% {q}%")))
+                               .order_by(Place.kind.desc(), func.length(Place.name)).limit(limit)))
+        if len(rows) < 2 and len(q) >= 4:
+            rows += nominatim_places(db, q, {p.name.lower() for p in rows})
     return [{"id": p.id, "kind": p.kind, "name": p.name, "pincode": p.pincode, "place_type": p.place_type,
              "lat": p.lat, "lng": p.lng} for p in rows]
+
+
+def nominatim_places(db: Session, q: str, existing: set[str]) -> list[Place]:
+    """Fallback for names OSM place nodes don't carry (e.g. "T Nagar" -> Thyagaraya Nagar).
+    Results are cached as Place rows so each name is looked up once (Nominatim policy)."""
+    import httpx
+
+    from ..config import get_settings
+    s = get_settings()
+    south, west, north, east = geo.CHENNAI_BBOX
+    try:
+        r = httpx.get(f"{s.nominatim_url}/search", timeout=8, headers={"User-Agent": s.nominatim_user_agent},
+                      params={"q": q, "format": "json", "limit": 3, "viewbox": f"{west},{north},{east},{south}",
+                              "bounded": 1, "countrycodes": "in"})
+        r.raise_for_status()
+        hits = r.json()
+    except Exception:  # noqa: BLE001 — search still works from local data
+        return []
+    out = []
+    for h in hits:
+        name = h.get("name") or h.get("display_name", "").split(",")[0]
+        lat, lng = float(h["lat"]), float(h["lon"])
+        if h.get("class") not in ("place", "boundary") or not name or name.lower() in existing                 or not geo.in_chennai(lat, lng):
+            continue
+        ptype = h.get("addresstype") if h.get("addresstype") in LOCALITY_TYPES else "locality"
+        p = Place(kind="locality", name=name, place_type=ptype, lat=lat, lng=lng, source="nominatim")
+        db.add(p)
+        db.commit()
+        existing.add(name.lower())
+        out.append(p)
+    return out
