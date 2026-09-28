@@ -8,7 +8,7 @@ non-overlapping, gap-free areas that tile the city.
 from __future__ import annotations
 
 import h3
-from sqlalchemy import func, or_, select
+from sqlalchemy import case, func, or_, select
 from sqlalchemy.orm import Session
 
 from .. import geo
@@ -66,7 +66,9 @@ def resolve(db: Session, selection_type: str, value: str | None, cells: list[str
         if value and value.isdigit():
             place = db.get(Place, int(value))
         if not place:
-            place = db.scalar(select(Place).where(Place.kind == "locality", func.lower(Place.name) == (value or "").lower().strip()))
+            rank = case({"city": 0, "town": 1, "suburb": 2, "quarter": 3, "neighbourhood": 4}, value=Place.place_type, else_=6)
+            place = db.scalar(select(Place).where(Place.kind == "locality", func.lower(Place.name) == (value or "").lower().strip())
+                              .order_by(rank))
         if not place:
             raise AreaError(f"Locality '{value}' not found. Pick one from the search suggestions.")
         rivals = [p for p in db.scalars(select(Place).where(Place.kind == "locality", Place.place_type.in_(LOCALITY_TYPES)))
@@ -97,8 +99,12 @@ def search(db: Session, q: str, limit: int = 12) -> list[dict]:
         rows = db.scalars(select(Place).where(Place.kind == "pincode", Place.pincode.like(f"{q}%"))
                           .order_by(Place.pincode).limit(limit))
     else:
+        # same names recur across greater Chennai ("Anna Nagar" is a suburb *and* several small localities):
+        # rank bigger, better-known place types first
+        rank = case({"city": 0, "town": 1, "suburb": 2, "quarter": 3, "neighbourhood": 4, "village": 5},
+                    value=Place.place_type, else_=6)
         rows = list(db.scalars(select(Place).where(or_(Place.name.ilike(f"{q}%"), Place.name.ilike(f"% {q}%")))
-                               .order_by(Place.kind.desc(), func.length(Place.name)).limit(limit)))
+                               .order_by(Place.kind, func.length(Place.name), rank).limit(limit)))  # localities before pincodes
         if len(rows) < 2 and len(q) >= 4:
             rows += nominatim_places(db, q, {p.name.lower() for p in rows})
     return [{"id": p.id, "kind": p.kind, "name": p.name, "pincode": p.pincode, "place_type": p.place_type,

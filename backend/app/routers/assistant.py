@@ -40,9 +40,10 @@ class AskIn(BaseModel):
 def _localities(db: Session, q: str) -> list[Place]:
     ql = q.lower()
     hits: list[Place] = []
-    names = db.execute(select(Place.id, Place.name).where(Place.kind == "locality",
-                                                         Place.place_type.in_(A.LOCALITY_TYPES))).all()
-    for pid, name in sorted(names, key=lambda x: -len(x[1])):
+    rank = {"city": 0, "town": 1, "suburb": 2, "quarter": 3, "neighbourhood": 4, "village": 5}
+    names = db.execute(select(Place.id, Place.name, Place.place_type).where(
+        Place.kind == "locality", Place.place_type.in_(A.LOCALITY_TYPES))).all()
+    for pid, name, _ in sorted(names, key=lambda x: (-len(x[1]), rank.get(x[2], 9))):
         n = name.lower()
         if len(n) >= 4 and re.search(rf"\b{re.escape(n)}\b", ql) and not any(n in h.name.lower() for h in hits):
             hits.append(db.get(Place, pid))

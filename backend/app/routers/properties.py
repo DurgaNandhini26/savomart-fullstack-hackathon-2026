@@ -151,8 +151,9 @@ async def upload_photo(pid: int, file: UploadFile = File(...), caption: str | No
         raise HTTPException(404, "Property not found")
     if user.role == "bd_exec" and p.submitted_by_id != user.id:
         raise HTTPException(403, "You can only add photos to your own properties")
-    if not (file.content_type or "").startswith("image/"):
-        raise HTTPException(415, "Only images are accepted")
+    # raster only: user-uploaded SVG could carry script
+    if file.content_type not in ("image/jpeg", "image/png", "image/webp"):
+        raise HTTPException(415, "Please upload a JPEG, PNG or WebP photo")
     content = await file.read()
     if len(content) > MAX_PHOTO_BYTES:
         raise HTTPException(413, "Photo too large (max 8 MB)")

@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
 import time
 from pathlib import Path
@@ -93,6 +94,7 @@ def from_nominatim() -> dict[str, dict]:
         addr = hit.get("address") or {}
         name = addr.get("suburb") or addr.get("neighbourhood") or addr.get("city_district") or \
             addr.get("town") or addr.get("village") or hit.get("display_name", "").split(",")[0]
+        name = re.sub(r"^Zone \d+\s+", "", name or "")  # "Zone 8 Anna Nagar" -> "Anna Nagar"
         out[pin] = {"lat": lat, "lng": lng, "name": name, "source": "Nominatim postcode centroid"}
     return out
 
