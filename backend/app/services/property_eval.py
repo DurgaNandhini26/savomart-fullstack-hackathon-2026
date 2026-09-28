@@ -202,6 +202,9 @@ def evaluate(db: Session, prop: Property) -> dict:
     near = m["nearest_stores"][0] if m["nearest_stores"] else None
     if near and near["distance_km"] < 1.5:
         risks.append(f"Only {near['distance_km']} km from Savomart {near['name']} — likely cannibalisation.")
+    elif near and near["distance_km"] > 10:
+        risks.append(f"{near['distance_km']} km from the nearest Savomart ({near['name']}) — would start a new cluster "
+                     "(higher supply and supervision cost).")
     elif near and 2 <= near["distance_km"] <= 6:
         insights.append(f"{near['distance_km']} km from Savomart {near['name']}: new catchment inside the supply cluster.")
     if m["supermarkets"] >= 4:

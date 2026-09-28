@@ -52,12 +52,13 @@ export function MapView({ center = CHENNAI, zoom = 11, className = '', basemap =
       style: BASEMAPS[basemap],
       center,
       zoom,
-      attributionControl: { compact: true },
+      attributionControl: false,
       interactive,
       dragRotate: false,
       pitchWithRotate: false,
     })
     m.touchZoomRotate.disableRotation()
+    m.addControl(new maplibregl.AttributionControl({ compact: true }), 'top-left')
     if (interactive) m.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right')
     let loaded = false
     m.on('error', (e) => {

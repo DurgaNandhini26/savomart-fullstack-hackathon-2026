@@ -1,6 +1,6 @@
 // Field-capture inputs for a property. Big touch targets, numeric keyboards, segmented choices.
 import clsx from 'clsx'
-import type { ReactNode } from 'react'
+import { cloneElement, isValidElement, useId, type ReactElement, type ReactNode } from 'react'
 
 export interface PropertyForm {
   title: string
@@ -71,10 +71,13 @@ function Seg({ value, onChange, options }: { value: string; onChange: (v: string
 }
 
 function F({ label, children, hint, className }: { label: string; children: ReactNode; hint?: string; className?: string }) {
+  const id = useId()
+  // wire the visible label to native inputs; segmented button groups get a named group instead
+  const native = isValidElement(children) && ['input', 'select', 'textarea'].includes((children as ReactElement).type as string)
   return (
-    <div className={className}>
-      <label className="label">{label}</label>
-      {children}
+    <div className={className} role={native ? undefined : 'group'} aria-label={native ? undefined : label}>
+      <label className="label" htmlFor={native ? id : undefined}>{label}</label>
+      {native ? cloneElement(children as ReactElement<any>, { id }) : children}
       {hint && <div className="mt-0.5 text-[11px] text-slate-400">{hint}</div>}
     </div>
   )

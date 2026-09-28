@@ -132,21 +132,29 @@ export function useDraft<T>(key: string, initial: T): [T, (v: T | ((p: T) => T))
       return initial
     }
   })
+  // only persist after the user actually changes something, so opening a form isn't a "draft"
+  const [dirty, setDirty] = useState(false)
   useEffect(() => {
+    if (!dirty) return
     try {
       localStorage.setItem(k, JSON.stringify(val))
     } catch {
       /* ignore */
     }
-  }, [k, val])
+  }, [k, val, dirty])
+  const update = (v: T | ((p: T) => T)) => {
+    setDirty(true)
+    setVal(v)
+  }
   const clear = () => {
+    setDirty(false)
     try {
       localStorage.removeItem(k)
     } catch {
       /* ignore */
     }
   }
-  return [val, setVal, clear]
+  return [val, update, clear]
 }
 
 export function hasDraft(key: string) {
