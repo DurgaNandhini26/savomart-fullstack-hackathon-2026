@@ -160,7 +160,7 @@ export default function Explore() {
             </button>
           </div>
           {panelOpen && (
-            <div className="max-h-[calc(100vh-220px)] space-y-3 overflow-y-auto p-4">
+            <div className="max-h-[42vh] space-y-3 overflow-y-auto p-4 sm:max-h-[calc(100vh-220px)]">
               <div className="grid grid-cols-2 gap-1 rounded-xl bg-slate-100 p-1 text-sm font-semibold">
                 <button className={clsx('flex items-center justify-center gap-1.5 rounded-lg py-1.5', mode === 'search' ? 'bg-white shadow text-savo-700' : 'text-slate-500')} onClick={() => setMode('search')}>
                   <Search className="h-4 w-4" /> Pincode / locality

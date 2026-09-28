@@ -45,7 +45,7 @@ export function Logo({ compact }: { compact?: boolean }) {
       </svg>
       {!compact && (
         <div className="leading-tight">
-          <div className="text-[15px] font-extrabold tracking-tight">
+          <div className="text-[15px] font-extrabold tracking-tight text-slate-900">
             Savo <span className="text-savo-600">SiteScout</span>
           </div>
           <div className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">Chennai expansion</div>

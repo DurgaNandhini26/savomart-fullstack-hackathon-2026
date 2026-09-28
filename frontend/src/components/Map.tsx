@@ -3,25 +3,24 @@ import maplibregl, { type LayerSpecification, type Map as MLMap, type MapLayerMo
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 
+// OpenFreeMap: free, keyless vector tiles built from OpenStreetMap. Falls back to OSM raster tiles.
 const BASEMAPS = {
-  light: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png',
-  streets: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png',
+  light: 'https://tiles.openfreemap.org/styles/positron',
+  streets: 'https://tiles.openfreemap.org/styles/liberty',
 }
 
-function style(kind: keyof typeof BASEMAPS): maplibregl.StyleSpecification {
-  return {
-    version: 8,
-    sources: {
-      base: {
-        type: 'raster',
-        tiles: ['a', 'b', 'c', 'd'].map((s) => BASEMAPS[kind].replace('{s}', s)),
-        tileSize: 256,
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © CARTO',
-        maxzoom: 19,
-      },
+const OSM_RASTER: maplibregl.StyleSpecification = {
+  version: 8,
+  sources: {
+    osm: {
+      type: 'raster',
+      tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+      tileSize: 256,
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxzoom: 19,
     },
-    layers: [{ id: 'base', type: 'raster', source: 'base' }],
-  }
+  },
+  layers: [{ id: 'osm', type: 'raster', source: 'osm' }],
 }
 
 const MapCtx = createContext<MLMap | null>(null)
@@ -50,7 +49,7 @@ export function MapView({ center = CHENNAI, zoom = 11, className = '', basemap =
   useEffect(() => {
     const m = new maplibregl.Map({
       container: el.current!,
-      style: style(basemap),
+      style: BASEMAPS[basemap],
       center,
       zoom,
       attributionControl: { compact: true },
@@ -60,7 +59,13 @@ export function MapView({ center = CHENNAI, zoom = 11, className = '', basemap =
     })
     m.touchZoomRotate.disableRotation()
     if (interactive) m.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right')
+    let loaded = false
+    m.on('error', (e) => {
+      // basemap style unreachable (offline / blocked) -> plain OSM raster so the app keeps working
+      if (!loaded && String((e as any)?.error?.message || '').match(/style|Failed to fetch|NetworkError/i)) m.setStyle(OSM_RASTER)
+    })
     m.on('load', () => {
+      loaded = true
       setMap(m)
       onReady?.(m)
     })
@@ -77,7 +82,8 @@ export function MapView({ center = CHENNAI, zoom = 11, className = '', basemap =
 
   return (
     <div className={`relative ${className}`}>
-      <div ref={el} className="absolute inset-0" />
+      {/* inline style: maplibre's unlayered CSS would override Tailwind's `absolute` */}
+      <div ref={el} style={{ position: 'absolute', inset: 0 }} />
       {map && <MapCtx.Provider value={map}>{children}</MapCtx.Provider>}
     </div>
   )
