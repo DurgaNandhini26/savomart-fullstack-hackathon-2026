@@ -3,7 +3,7 @@
 SiteScout is my take on Savomart's expansion problem for Chennai. It follows a new store from "which area should we look at?" to "which property?" to "is the catchment really there?", and it keeps the BD team and the survey team working in the same loop.
 
 - Repository: https://github.com/DurgaNandhini26/savomart-fullstack-hackathon-2026
-- Video demo: _TODO: Google Drive link_
+- Video demo (2 min 45 s): https://drive.google.com/file/d/1_hG0-11EPyOrdGGeS6zx41o1yFnA-oZp/view?usp=sharing
 - AI chat sessions: [ai-sessions/](ai-sessions/)
 
 Each of the four personas gets a view built around their job:
