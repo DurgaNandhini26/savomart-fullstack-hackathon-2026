@@ -132,7 +132,7 @@ erDiagram
 | Source | Used for | Processing |
 |---|---|---|
 | **OpenStreetMap / Overpass**, snapshot 2026-09-28 | 12,869 points of interest, 113,769 roads, 389,056 buildings, 850 localities | Fetched in tiles over the Chennai metro area, with mirror rotation, retries and an on-disk cache. Points of interest are mapped to a 17-category taxonomy. Roads are densified and split per H3 cell, giving 166k segments. Buildings are reduced to centroids and counted per cell by type. |
-| **Savomart Stores API** | 74 stores (11 in Chennai) | Used for proximity, cannibalisation and network fit. A copy is committed in `data/seed/stores.json`. |
+| **Savomart Stores API** | 74 stores (11 in Chennai) | Fetched with a plain `GET` and the `X-cron-token` header (as in the corrected command; the original `--data ''` made it a POST, which returns 405). Used for proximity, cannibalisation and network fit. A copy is committed in `data/seed/stores.json`. |
 | **Nominatim** | 126 pincode centroids, reverse geocoding, locality aliases | Kept to 1 request per second and cached. The OGD pincode API is tried first but timed out during the build. |
 | **Census of India 2011** | Population calibration: about 9.0 M people in the study area, 4.0 people per household | Used for the dasymetric estimate in §6. |
 | **Mock data** (labelled *MOCK* in the UI) | Rent benchmark in ₹ per sq ft | No open rent data exists for Chennai. |
