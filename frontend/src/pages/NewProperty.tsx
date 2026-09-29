@@ -183,9 +183,9 @@ export default function NewProperty() {
               {!locOk && mission && <FitBounds points={[[mission.lng, mission.lat]]} maxZoom={16} />}
               {d.device_lat != null && <Marker lng={d.device_lng!} lat={d.device_lat!}><div className="h-4 w-4 rounded-full border-2 border-white bg-sky-500 shadow" /></Marker>}
             </MapView>
-            <div className="pointer-events-none absolute left-2 top-2 rounded-lg bg-white/95 px-2 py-1 text-xs text-slate-600 shadow">
-              <Crosshair className="mr-1 inline h-3 w-3" /> Tap the map or drag the pin onto the entrance
-            </div>
+          </div>
+          <div className="-mt-1 flex items-center gap-1 text-xs text-slate-500">
+            <Crosshair className="h-3 w-3 shrink-0" /> Tap the map or drag the pin onto the entrance
           </div>
           {locOk && (
             <div className="rounded-xl bg-slate-50 p-3 text-sm">

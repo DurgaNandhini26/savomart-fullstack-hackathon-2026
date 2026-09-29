@@ -126,10 +126,10 @@ export function PropertyFields({ f, set }: { f: PropertyForm; set: (p: Partial<P
           <input className="input" inputMode="numeric" value={f.rent_monthly} disabled={f.rent_negotiable} onChange={(e) => set({ rent_monthly: e.target.value.replace(/\D/g, '') })} />
         </F>
         <label className="flex items-center gap-2 text-sm"><input type="checkbox" className="h-4 w-4 accent-savo-600" checked={f.rent_negotiable} onChange={(e) => set({ rent_negotiable: e.target.checked, rent_monthly: e.target.checked ? '' : f.rent_monthly })} /> Owner hasn't quoted rent yet</label>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           <F label="Deposit (months)"><input className="input" inputMode="numeric" value={f.deposit_months} onChange={(e) => set({ deposit_months: e.target.value.replace(/[^\d.]/g, '') })} /></F>
           <F label="Lease (years)"><input className="input" inputMode="numeric" value={f.lease_years} onChange={(e) => set({ lease_years: e.target.value.replace(/[^\d.]/g, '') })} /></F>
-          <F label="Available from"><input type="date" className="input px-2" value={f.available_from} onChange={(e) => set({ available_from: e.target.value })} /></F>
+          <F label="Available from" className="col-span-2 sm:col-span-1"><input type="date" className="input px-2" value={f.available_from} onChange={(e) => set({ available_from: e.target.value })} /></F>
         </div>
         <div className="grid grid-cols-2 gap-3">
           <F label="Owner / broker"><input className="input" value={f.owner_name} onChange={(e) => set({ owner_name: e.target.value })} /></F>

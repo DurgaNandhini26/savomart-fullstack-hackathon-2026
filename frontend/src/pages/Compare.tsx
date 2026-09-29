@@ -18,7 +18,9 @@ export default function Compare() {
   if (error) return <div className="p-6"><ErrorBox error={error} /></div>
   const reports = (data || []).filter((r: any) => r.status === 'completed')
   const pillarKeys = reports[0] ? Object.keys(reports[0].pillars) : []
-  const radar = pillarKeys.map((k) => ({ pillar: reports[0].pillars[k].label, ...Object.fromEntries(reports.map((r: any) => [r.name, Math.round(r.pillars[k].score)])) }))
+  // short axis labels so the radar fits on a phone
+  const SHORT: Record<string, string> = { demand: 'Demand', gap: 'Comp. gap', activity: 'Footfall', spending: 'Spending', network: 'Network', access: 'Access' }
+  const radar = pillarKeys.map((k) => ({ pillar: SHORT[k] || reports[0].pillars[k].label, ...Object.fromEntries(reports.map((r: any) => [r.name, Math.round(r.pillars[k].score)])) }))
   const idsArr = ids.split(',').filter(Boolean)
 
   const rows: [string, (r: any) => any][] = [
@@ -47,7 +49,7 @@ export default function Compare() {
       </div>
       {reports.length < 1 ? <ErrorBox error="Pick at least one completed report." /> : (
         <>
-          <div className="grid gap-3" style={{ gridTemplateColumns: `repeat(${reports.length}, minmax(0, 1fr))` }}>
+          <div className={`grid gap-3 sm:grid-cols-2 ${reports.length >= 3 ? 'lg:grid-cols-4' : ''}`}>
             {reports.map((r: any, i: number) => (
               <Link key={r.id} to={`/reports/${r.id}`} className="card flex items-center gap-3 p-4" style={{ borderTop: `4px solid ${COLORS[i]}` }}>
                 <ScoreRing score={r.score} size={64} />
@@ -62,9 +64,9 @@ export default function Compare() {
             <Section title="Pillar profile">
               <div className="h-80">
                 <ResponsiveContainer>
-                  <RadarChart data={radar} outerRadius="72%">
+                  <RadarChart data={radar} outerRadius="68%">
                     <PolarGrid />
-                    <PolarAngleAxis dataKey="pillar" tick={{ fontSize: 11 }} />
+                    <PolarAngleAxis dataKey="pillar" tick={{ fontSize: 11, fill: '#475569' }} />
                     <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
                     {reports.map((r: any, i: number) => <Radar key={r.id} name={r.name} dataKey={r.name} stroke={COLORS[i]} fill={COLORS[i]} fillOpacity={0.12} strokeWidth={2} />)}
                     <Legend wrapperStyle={{ fontSize: 12 }} />
@@ -73,20 +75,30 @@ export default function Compare() {
                 </ResponsiveContainer>
               </div>
             </Section>
-            <Section title="Side by side">
+            <Section title="Side by side" right={reports.length > 2 && <span className="text-xs text-slate-400 lg:hidden">swipe for more →</span>}>
               <div className="overflow-x-auto">
-                <table className="w-full text-sm">
+                <table className="w-full min-w-[420px] text-sm">
+                  <thead>
+                    <tr className="text-left text-xs">
+                      <th className="sticky left-0 bg-white py-1.5 pr-2 font-semibold text-slate-400">Metric</th>
+                      {reports.map((r: any, i: number) => (
+                        <th key={r.id} className="py-1.5 pl-2 text-right font-bold text-slate-700">
+                          <span className="mr-1 inline-block h-2 w-2 rounded-full" style={{ background: COLORS[i] }} />{r.name}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
                   <tbody>
                     {pillarKeys.map((k) => (
                       <tr key={k} className="border-t border-slate-100">
-                        <td className="py-1.5 pr-2 text-slate-500">{reports[0].pillars[k].label}</td>
+                        <td className="sticky left-0 bg-white py-1.5 pr-2 text-slate-500">{reports[0].pillars[k].label}</td>
                         {reports.map((r: any) => <td key={r.id} className="py-1.5 text-right font-bold tabular-nums" style={{ color: scoreColor(r.pillars[k].score) }}>{Math.round(r.pillars[k].score)}</td>)}
                       </tr>
                     ))}
                     {rows.map(([label, fn]) => (
                       <tr key={label} className="border-t border-slate-100">
-                        <td className="py-1.5 pr-2 text-slate-500">{label}</td>
-                        {reports.map((r: any) => <td key={r.id} className="py-1.5 text-right tabular-nums">{fn(r)}</td>)}
+                        <td className="sticky left-0 bg-white py-1.5 pr-2 text-slate-500">{label}</td>
+                        {reports.map((r: any) => <td key={r.id} className="py-1.5 pl-2 text-right tabular-nums">{fn(r)}</td>)}
                       </tr>
                     ))}
                   </tbody>

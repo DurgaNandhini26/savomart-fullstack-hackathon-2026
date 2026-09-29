@@ -25,13 +25,13 @@ export default function DecisionPack() {
   const f = e?.facts || {}
 
   return (
-    <div className="mx-auto max-w-4xl bg-white p-6 text-sm print:p-0">
+    <div className="mx-auto max-w-4xl bg-white p-4 text-sm sm:p-6 print:p-0">
       <div className="no-print mb-4 flex justify-end"><button className="btn-primary" onClick={() => window.print()}><Printer className="h-4 w-4" /> Print / Save as PDF</button></div>
-      <header className="flex items-center justify-between border-b-4 border-savo-600 pb-3">
+      <header className="flex flex-wrap items-center justify-between gap-2 border-b-4 border-savo-600 pb-3">
         <Logo />
         <div className="text-right text-xs text-slate-500">Decision pack · {p.code}<br />Generated {dateTime(new Date().toISOString())}</div>
       </header>
-      <div className="mt-4 flex items-start gap-4">
+      <div className="mt-4 flex flex-wrap items-start gap-4">
         <ScoreRing score={e?.score} size={90} />
         <div className="flex-1">
           <h1 className="text-2xl font-extrabold">{p.title}</h1>
@@ -42,7 +42,7 @@ export default function DecisionPack() {
         </div>
       </div>
 
-      <div className="mt-4 grid grid-cols-4 gap-2">
+      <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
         {[['Rent / month', fmtINR(p.rent_monthly)], ['Rent / sq ft', f.rent_psf ? `₹${fmt1(f.rent_psf)} (bench. ₹${fmt1(f.rent_benchmark_psf_mock)} mock)` : '—'],
           ['Carpet area', `${fmtInt(p.carpet_area_sqft)} sq ft`], ['Frontage · floor', `${p.frontage_ft ?? '—'} ft · ${p.floor || '—'}`],
           ['Residents ≤ 800 m', fmtInt(f.residents_est)], ['Grocery outlets ≤ 800 m', f.grocery_outlets_mapped], ['Nearest Savomart', `${f.nearest_savomart?.name} · ${fmt1(f.nearest_savomart?.distance_km)} km`],
@@ -51,7 +51,7 @@ export default function DecisionPack() {
         ))}
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-4">
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <div>
           <h2 className="mb-1 font-bold text-emerald-700">Strengths</h2>
           <ul className="list-disc space-y-0.5 pl-4">{e?.insights?.map((s: string) => <li key={s}>{s}</li>)}</ul>
@@ -62,7 +62,7 @@ export default function DecisionPack() {
         </div>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-4">
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <div className="h-64 overflow-hidden rounded-xl border">
           <MapView className="h-full" center={[p.lng, p.lat]} zoom={14} basemap="streets" interactive={false}>
             {stores.data?.map((s: any) => <Marker key={s.code} lng={s.lng} lat={s.lat}><StoreMarker name={s.name} /></Marker>)}
@@ -93,7 +93,7 @@ export default function DecisionPack() {
 
       <div className="mt-4">
         <h2 className="mb-1 font-bold">Decision trail</h2>
-        <table className="w-full text-xs">
+        <div className="overflow-x-auto"><table className="w-full min-w-[480px] text-xs">
           <tbody>
             {[...p.events].reverse().map((ev: any) => (
               <tr key={ev.id} className="border-t align-top">
@@ -104,7 +104,7 @@ export default function DecisionPack() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table></div>
       </div>
       <footer className="mt-6 border-t pt-2 text-[10px] text-slate-400">
         Evaluation v{e?.version} ({e?.trigger}). Residents are Census-2011-calibrated estimates from OpenStreetMap; rent benchmarks are mock data. Data: © OpenStreetMap contributors, Savomart Stores API.

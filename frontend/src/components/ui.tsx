@@ -183,7 +183,7 @@ export function Stat({ label, value, sub, icon }: { label: string; value: ReactN
         {icon}
         {label}
       </div>
-      <div className="mt-1 text-2xl font-extrabold text-slate-900 tabular-nums">{value}</div>
+      <div className="mt-1 truncate text-2xl font-extrabold text-slate-900 tabular-nums">{value}</div>
       {sub && <div className="text-xs text-slate-500">{sub}</div>}
     </div>
   )
@@ -197,9 +197,9 @@ export function DataVersions({ versions, created }: { versions?: Record<string, 
     stores: 'Savomart stores', pincodes: 'Pincode centroids', baseline: 'City baseline',
   }
   return (
-    <div className="text-xs text-slate-500">
+    <div className="overflow-x-auto text-xs text-slate-500">
       <div className="mb-1 font-semibold text-slate-600">Data used {created && <>· report generated {dateTime(created)}</>}</div>
-      <table className="w-full">
+      <table className="w-full min-w-[520px]">
         <tbody>
           {rows.map(([k, v]) => (
             <tr key={k} className="border-t border-slate-100">

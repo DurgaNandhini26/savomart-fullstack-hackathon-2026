@@ -277,7 +277,7 @@ function KeyFact({ label, value, sub, tone }: { label: string; value: any; sub?:
     <div className={clsx('rounded-xl p-2.5', tone === 'bad' ? 'bg-rose-50' : tone === 'good' ? 'bg-emerald-50' : 'bg-slate-50')}>
       <div className="text-[11px] font-semibold uppercase text-slate-500">{label}</div>
       <div className="text-base font-extrabold tabular-nums">{value}</div>
-      {sub && <div className="text-[11px] text-slate-500">{sub}</div>}
+      {sub && <div className="flex flex-wrap items-center gap-1 text-[11px] text-slate-500">{sub}</div>}
     </div>
   )
 }
