@@ -1,22 +1,25 @@
 # Savo SiteScout
 
-Expansion intelligence for Savomart Chennai: **which area → which property → is the catchment right**, in one loop shared by BD and survey teams.
+SiteScout is my take on Savomart's expansion problem for Chennai. It follows a new store from "which area should we look at?" to "which property?" to "is the catchment really there?", and it keeps the BD team and the survey team working in the same loop.
 
-- **Video demo:** _TODO: Google Drive link_
-- **AI chat sessions:** [`ai-sessions/`](ai-sessions/)
+- Repository: https://github.com/DurgaNandhini26/savomart-fullstack-hackathon-2026
+- Video demo: _TODO: Google Drive link_
+- AI chat sessions: [ai-sessions/](ai-sessions/)
 
-| Persona | Their view |
+Each of the four personas gets a view built around their job:
+
+| Persona | What they do in SiteScout |
 |---|---|
-| **BD Manager** | Map of Chennai with a city-wide opportunity layer → explainable *Area Fitness Report* with "scout here first" hotspots → send executives → 30-second property decision card and pipeline → request catchment studies → grounded AI analyst |
-| **BD Executive** (phone) | Missions with navigation → 4-step onboarding: GPS / pin → details → camera photos → duplicate & sanity check. Works offline. |
-| **Survey Manager** | Incoming requests → split into fair, non-overlapping sectors → assign → track progress and team workload |
-| **Survey Executive** (phone) | Assigned sector on a map → lane-by-lane capture with autosaved drafts and an offline outbox |
+| BD Manager | Explores Chennai on a map (with a city-wide opportunity layer), runs an Area Fitness Report, sends executives to the suggested hotspots, decides on properties from a one-screen summary, requests catchment studies and asks the AI analyst questions. |
+| BD Executive (phone) | Sees their missions, navigates there, and onboards a property in four steps: pin, details, photos, and a duplicate/sanity check. It works offline. |
+| Survey Manager | Receives study requests, splits each one into fair, non-overlapping sectors, assigns them and tracks progress. |
+| Survey Executive (phone) | Walks their sector lane by lane and records what they see. Drafts save automatically and everything syncs when the signal comes back. |
 
 ---
 
-## 1. Run it locally
+## 1. Running it locally
 
-Requires **Python 3.11+** and **Node 20+**. No database server and no API keys needed.
+You need Python 3.11+ and Node 20+. There's no database server to install and no API key is required.
 
 ```bash
 # backend
@@ -24,25 +27,25 @@ cd backend
 python -m venv .venv
 .venv\Scripts\activate              # macOS/Linux: source .venv/bin/activate
 pip install -r requirements.txt
-python -m scripts.bootstrap         # Chennai data + demo users + demo scenario (~1 min)
+python -m scripts.bootstrap         # loads Chennai data, demo users and a demo scenario (~1 min)
 uvicorn app.main:app --reload       # API on :8000, docs at /docs
 
-# frontend (second terminal)
+# frontend, in a second terminal
 cd frontend
 npm install
 npm run dev                         # open http://localhost:5173
 ```
 
-**Or with Docker:** `docker compose up --build` → http://localhost:8000 (API and UI in one container).
+If you prefer Docker, `docker compose up --build` runs the API and the UI together on http://localhost:8000.
 
-**Optional:**
-- `cp backend/.env.example backend/.env` to add an LLM key (see §6) or the Stores API token.
-- `python -m scripts.bootstrap --fresh` resets to the demo state.
-- `--live` re-ingests all public data from source.
+A few optional things:
+- Copy `backend/.env.example` to `backend/.env` to add an LLM key (see section 6) or the Stores API token.
+- `python -m scripts.bootstrap --fresh` resets everything back to the demo state.
+- `python -m scripts.bootstrap --live` re-downloads all the public data from source instead of using the committed snapshot.
 
-## 2. Demo credentials
+## 2. Demo logins
 
-The login page has one-tap persona cards. The password for every account is **`savo@123`**.
+The login page has one-tap cards for each persona. Every account's password is `savo@123`.
 
 | Username | Role |
 |---|---|
@@ -51,23 +54,18 @@ The login page has one-tap persona cards. The password for every account is **`s
 | `lakshmi` | Survey Manager |
 | `suresh`, `divya`, `mani` | Survey Executive |
 
-The bootstrap seeds the demo **by calling the real API as each persona**, so every evaluation, audit event and notification in it is genuine. It creates:
-- 6 area reports
-- 6 scouting missions
-- 8 properties spread across every pipeline stage
-- 4 catchment studies:
-  - **CS-001** completed
-  - **CS-002** satisfied entirely by reusing CS-001
-  - **CS-003** half-surveyed
-  - **CS-004** waiting for the survey manager
+The demo data isn't inserted straight into the database. The bootstrap script logs in as each persona and uses the real API, so every evaluation, history entry and notification you see was produced by the app itself. You'll find:
+- 6 area reports and 6 scouting missions;
+- 8 properties at different pipeline stages;
+- 4 catchment studies: CS-001 is complete, CS-002 was answered entirely by reusing CS-001, CS-003 is half surveyed, and CS-004 is waiting for the survey manager.
 
-**Suggested walkthrough**
-1. **priya** → *Explore*: search `Velachery` or `600042`, or tap hexagons in *Grid cells* → *Run virtual analysis*. On the report, *Send an executive* to a hotspot.
-2. **arun** → *Missions* → *Add property here* → submit. It is scored automatically within seconds.
-3. **priya** → *Pipeline* → open the property → *Shortlist* → *Catchment study* (the preview shows how much is already surveyed).
-4. **lakshmi** → CS-004 → *Split into sectors* → assign surveyors.
-5. **suresh** → CS-003 → *Next lane to survey* → capture a lane (try it with the network off).
-6. **priya** → PR-0001: evaluation v2 is ground-truthed by CS-001 → *Decision pack*. Then *Analyst*: "compare Velachery and Tambaram".
+A good way to walk through it:
+1. Log in as priya, open Explore, search "Velachery" or "600042" (or tap a few hexagons in Grid cells) and run a virtual analysis. From the report, send an executive to a hotspot.
+2. Log in as arun, open the mission and tap "Add property here". Once you submit, it gets scored within a few seconds.
+3. Back as priya, open the property from the Pipeline, shortlist it and request a catchment study. The preview shows how much of the area was already surveyed.
+4. As lakshmi, open CS-004, split it into sectors and assign the surveyors.
+5. As suresh, open CS-003 and record a lane. Try it with the network turned off.
+6. As priya, open PR-0001. Its latest evaluation is backed by the CS-001 survey. Print the decision pack, then ask the Analyst to "compare Velachery and Tambaram".
 
 ## 3. Architecture
 
@@ -89,19 +87,17 @@ flowchart LR
   ING -.-> SRC[(OSM Overpass · Stores API · Nominatim)]
 ```
 
-- **Background jobs.** Area analyses and property evaluations run as jobs stored in a `jobs` table with ordered steps. The UI shows a live checklist of those steps. A failed job keeps its error and can be retried, and jobs interrupted by a server restart are re-queued at startup.
-- **Access control is enforced on the server.** Every endpoint requires a role, and there are row-level rules on top:
-  - executives see only their own missions and properties;
-  - surveyors can only write to lanes assigned to them;
-  - only managers move pipeline stages.
-- **Errors.** Validation problems return 422 with the field named. Domain conflicts return 409 or 422 with plain-English messages. Unexpected 500s never leak stack traces. The UI shows inline errors with a retry, and a per-screen error boundary keeps one broken screen from blanking the app.
+Some notes on how it hangs together:
+- Area analyses and property evaluations run as background jobs. Each job is saved in the database with a list of steps, and the UI shows those steps ticking off live. If a job fails you can retry it, and if the server restarts mid-job it picks the job up again.
+- Access control lives on the server, not just in the UI. Every endpoint checks the user's role, executives only see their own missions and properties, surveyors can only write to lanes assigned to them, and only managers can move a property between stages.
+- Errors are meant to be readable. Bad input comes back as a 422 that names the field, conflicts such as duplicates come back as 409 with a plain explanation, and unexpected errors never leak a stack trace. In the UI, each screen has its own error boundary, so one broken screen doesn't blank the whole app.
 
 ## 4. Data model
 
-**Spatial approach.** Every located row stores lat/lng plus **H3** hexagon ids at res 9 (≈0.1 km²) and res 8 (≈0.74 km²). The same grid does three jobs:
-- **Spatial index:** a query finds the cells in a ring around a point, then applies an exact distance filter.
-- **Map selection:** it is the grid the manager taps to choose an area.
-- **Survey coverage:** hexagons never overlap, so "already surveyed" is simple set arithmetic.
+Everything that has a location also stores H3 hexagon IDs, at resolution 9 (about 0.1 km²) and resolution 8 (about 0.74 km²). I leaned on this one grid for three different things:
+- as the spatial index: to find things near a point, I look up the hexagons in a ring around it and then filter by exact distance;
+- as the grid the manager taps on the map to pick an area;
+- as the unit of survey coverage. Hexagons never overlap, so "has this already been surveyed?" becomes simple set arithmetic.
 
 ```mermaid
 erDiagram
@@ -117,150 +113,155 @@ erDiagram
   SURVEY_LANES ||--o{ LANE_OBSERVATIONS : captured
 ```
 
-| Tables | Notes |
+| Tables | What they hold |
 |---|---|
-| `pois`, `roads`, `places`, `stores` | Ingested public data. Roads are split into one segment per res-9 cell. |
-| `cell_stats`, `opportunity_cells`, `baseline_meta` | Features pre-aggregated per cell, citywide score distributions (used for percentiles), and the opportunity map. |
-| `data_snapshots` | One row per ingestion run (source, fetch time, OSM timestamp, row count). This is stamped onto every report and evaluation. |
-| `area_reports` | The selected cells, score, pillars, indicators, profile, hotspots, narrative with its AI metadata, data versions, and ground truth. |
-| `properties` · `property_evaluations` · `property_events` | Captured details with data-quality warnings and a `client_uuid` for idempotent submits. Evaluations are **versioned**, with the reason each one was triggered. Events are an immutable audit log. |
-| `catchment_studies` · `work_units` · `survey_lanes` · `lane_observations` | Requested vs still-to-survey cells, the studies being reused, sectors, lanes, and observations keyed by `client_uuid`. |
-| `jobs`, `notifications`, `users` | Background jobs with steps, the activity feed, and seeded users (PBKDF2 password hashes). |
+| `pois`, `roads`, `places`, `stores` | The public data. Roads are cut into one piece per hexagon. |
+| `cell_stats`, `opportunity_cells`, `baseline_meta` | Per-hexagon features, the city-wide score distributions used for percentiles, and the opportunity map. |
+| `data_snapshots` | One row per data import (source, when it was fetched, OSM timestamp, row count). Every report and evaluation records which snapshot it used. |
+| `area_reports` | The chosen hexagons, the score and how it was built, the area profile, hotspots, the written summary and, later, survey results. |
+| `properties`, `property_evaluations`, `property_events` | What the executive captured (plus any data-quality warnings), a versioned history of evaluations with the reason for each, and a permanent log of who did what. |
+| `catchment_studies`, `work_units`, `survey_lanes`, `lane_observations` | What was requested vs what still needs surveying, which earlier studies were reused, the sectors, the lanes and the recorded observations. |
+| `jobs`, `notifications`, `users` | Background jobs, the activity feed and the demo users. |
 
-## 5. Data sources
+## 5. Where the data comes from
 
-| Source | Used for | Processing |
+| Source | What I used it for | How I processed it |
 |---|---|---|
-| **OpenStreetMap / Overpass**, snapshot 2026-09-28 | 12,869 points of interest, 113,769 roads, 389,056 buildings, 850 localities | Fetched in tiles over the Chennai metro area, with mirror rotation, retries and an on-disk cache. Points of interest are mapped to a 17-category taxonomy. Roads are densified and split per H3 cell, giving 166k segments. Buildings are reduced to centroids and counted per cell by type. |
-| **Savomart Stores API** | 74 stores (11 in Chennai) | Fetched with a plain `GET` and the `X-cron-token` header (as in the corrected command; the original `--data ''` made it a POST, which returns 405). Used for proximity, cannibalisation and network fit. A copy is committed in `data/seed/stores.json`. |
-| **Nominatim** | 126 pincode centroids, reverse geocoding, locality aliases | Kept to 1 request per second and cached. The OGD pincode API is tried first but timed out during the build. |
-| **Census of India 2011** | Population calibration: about 9.0 M people in the study area, 4.0 people per household | Used for the dasymetric estimate in §6. |
-| **Mock data** (labelled *MOCK* in the UI) | Rent benchmark in ₹ per sq ft | No open rent data exists for Chennai. |
+| OpenStreetMap via Overpass (snapshot of 28 Sept 2026) | 12,869 points of interest, 113,769 roads, 389,056 buildings, 850 localities | Downloaded in tiles over the Chennai metro area, with retries across several Overpass servers and a local cache. Shops and amenities are grouped into 17 categories, roads are split per hexagon (166k pieces), and buildings are counted per hexagon by type. |
+| Savomart Stores API | 74 stores, 11 of them in Chennai | Called with a plain GET and the `X-cron-token` header, as in the organisers' corrected command. Used for distance to existing stores and cannibalisation. A copy lives in `data/seed/stores.json`. |
+| Nominatim | 126 pincode centres, address lookup for field pins, locality aliases like "T Nagar" | Limited to one request per second and cached. I tried the OGD pincode API first, but it kept timing out. |
+| Census of India 2011 | Population total for calibration (about 9.0 million for the study area) and household size (about 4) | Used for the population estimate described in section 6. |
+| Mock data, labelled "MOCK" in the app | Rent benchmark per sq ft | I couldn't find any open rent data for Chennai. |
 
-The processed tables are committed as `backend/data/seed/public_data.sqlite.gz` (about 12 MB), so the setup never depends on the public Overpass servers, which are often overloaded. Map data © OpenStreetMap contributors (ODbL). Basemap tiles: OpenFreeMap.
+The processed data is committed as `backend/data/seed/public_data.sqlite.gz` (about 12 MB), because the public Overpass servers were often overloaded and I didn't want the setup to depend on them. Map data © OpenStreetMap contributors (ODbL); basemap tiles by OpenFreeMap.
 
-**Caveats, which the UI also states:**
-- OSM under-maps small kirana stores, so mapped competition is a *relative* signal and the survey is the ground truth.
-- Building coverage in OSM is patchy, which is why every report carries a data-completeness *confidence* level.
+Two limitations are worth knowing about, and the app mentions both:
+- OpenStreetMap misses most small kirana stores, so the mapped competition is only a relative signal. The field survey is the real check.
+- Building coverage in OpenStreetMap is uneven, so every report shows a confidence level based on how complete the data is for that area.
 
-## 6. Scoring and AI
+## 6. How scoring and the AI work
 
-**Population estimate (dasymetric).** The Census total is spread across cells in proportion to two signals, weighted 50/50:
-- residential buildings, where buildings of unknown type count 0.7;
-- residential street length.
+Population. There's no recent population data per neighbourhood, so I spread the Census total across hexagons in proportion to two signals, half each: residential buildings (buildings of unknown type count as 0.7) and residential street length. Streets are almost fully mapped in OpenStreetMap while buildings aren't, so combining them is more reliable than using either on its own. In the demo, the CS-001 survey came within 1% of the estimated number of households.
 
-Streets are almost complete in OSM while buildings are not, so blending the two is more robust than either alone. The demo survey CS-001 landed within **1%** of the model's household estimate.
+Area fit. An area is scored on six pillars. Each pillar is a percentile against roughly 1,470 populated neighbourhoods across Chennai, so a 72 simply means "better than 72% of the city on this measure".
 
-**Area fit.** There are six pillars. Each one is a **percentile against the ~1,470 populated ~1.5 km neighbourhoods of Chennai**, so a 72 means "better than 72% of the city on this dimension".
-
-| Pillar | Weight | Indicators |
+| Pillar | Weight | Based on |
 |---|---|---|
 | Resident demand | 25% | residents per km² |
-| Competition gap | 25% | residents per grocery outlet · supermarkets per 10k people (inverted) |
-| Daily footfall | 15% | schools, clinics, transit, worship, offices and markets per km² |
-| Spending power (proxy) | 10% | banks, eateries and malls per km² · share of apartments |
-| Network fit | 15% | distance to the nearest Savomart: under 1 km cannibalises an existing store; 2.5–5 km is the sweet spot |
-| Access | 10% | road density · arterial roads |
+| Competition gap | 25% | residents per grocery outlet, and supermarkets per 10k people (fewer is better) |
+| Daily footfall | 15% | schools, clinics, transit stops, places of worship, offices and markets per km² |
+| Spending power (a proxy) | 10% | banks, restaurants and malls per km², and the share of apartments |
+| Network fit | 15% | distance to the nearest Savomart. Under 1 km would steal from an existing store, and 2.5–5 km is the sweet spot |
+| Access | 10% | road density and main roads |
 
-The report shows the formula `Σ pillar × weight` with the real numbers filled in, plus every indicator with its source. The **confidence** level comes from data completeness, not from the score. Bands: Strong ≥ 70 · Promising ≥ 55 · Marginal ≥ 40 · Weak.
+The report shows the full calculation with the real numbers, lists every indicator with its source, and gives a confidence level that depends on data quality rather than on the score. Scores of 70 and up are a strong fit, 55 and up promising, 40 and up marginal, and anything lower is weak.
 
-**Hotspots.** Every populated fine cell in the area is scored on its ~750 m walking catchment: `0.35 demand + 0.25 gap + 0.15 footfall + 0.15 road visibility + 0.10 network`. The top 5 are kept, at least 800 m apart, each listed with its reasons.
+Hotspots. Inside the chosen area, every populated small hexagon is scored on what's within a ~750 m walk: `0.35 × demand + 0.25 × competition gap + 0.15 × footfall + 0.15 × road visibility + 0.10 × network fit`. The best five that are at least 800 m apart are suggested, each with the reasons behind it.
 
-**Property evaluation.** Four pillars:
-- **Catchment, 40%:** public data within 800 m, replaced by survey results once a catchment study covers the property.
-- **Site, 25%:** size, frontage, floor, road, parking, power, truck access.
-- **Commercials, 20%:** rent vs the benchmark, deposit, lease length.
-- **Network, 15%:** distance to the nearest Savomart.
+Property evaluation. A property is scored on four things:
+- the catchment (40%): public data within 800 m, swapped for the survey results once a catchment study covers it;
+- the site (25%): size, frontage, floor, road, parking, power and truck access;
+- the commercials (20%): rent against the benchmark, deposit and lease length;
+- the network (15%): distance to the nearest Savomart.
 
-**Deal-breakers** cap the score at 64, so a great catchment can't hide a bad site: a first floor, under 800 sq ft, within 1.5 km of a store, or rent more than 20% over the benchmark. Recommendation: **Go** at 68 or above, **Consider** at 50 or above, otherwise **No-go**.
+Some problems are deal-breakers no matter how good the area is: a first-floor unit, less than 800 sq ft, less than 1.5 km from an existing store, or rent more than 20% over the benchmark. Any of these caps the score at 64. A score of 68 or more is a "Go", 50 or more is "Consider", and anything below is "No-go".
 
-**Bad field input:**
-- Pins outside the Chennai region are rejected.
-- Softer problems are shown to the manager as warnings: the pin is more than 250 m from the phone's GPS, poor GPS accuracy, missing rent or area, or a rent per sq ft that looks like the wrong unit.
-- Another property within 40 m returns 409 until the executive confirms it's a different unit.
-- Offline retries are idempotent.
+Bad field input. Pins outside the Chennai region are rejected outright. Softer issues become warnings for the manager: the pin is more than 250 m from where the phone was, the GPS was inaccurate, rent or area is missing, or the rent per sq ft looks like the wrong unit (annual instead of monthly, for example). If another property already exists within 40 m, the executive has to confirm it's a different unit, and resubmitting after a dropped connection never creates a duplicate.
 
-**Evaluations are versioned.** A new version is created when details are edited, when the manager asks, or when a catchment study completes. The UI shows the change, e.g. `v1: 94 → v2: 84`, and which study ground-truthed it. A property uses its own study first, otherwise the study whose catchment is best centred on it.
+Evaluations keep their history. A new version is created when the details are edited, when the manager asks for one, or when a catchment study finishes. The page shows how the score moved (for example `v1: 94 → v2: 84`) and which survey caused it.
 
-**Pipeline stages:**
-- `submitted` → `shortlisted` → `site_visit` / `catchment_study` → `negotiation` → `approved`
-- `info_requested`: the executive answers by editing, which sends the property back to `submitted`
-- `rejected` (needs a reason), `on_hold`, `duplicate`
+Pipeline stages. A property moves from `submitted` to `shortlisted`, then to a site visit or catchment study, then `negotiation`, and finally `approved`. The manager can also ask the executive for more information (they answer by editing the property), or mark it rejected, on hold or a duplicate. Every move needs a note, rejections need a reason, and only managers can move a property.
 
-Every transition needs a note. Only managers move stages.
-
-**How AI is used and kept grounded.** The LLM never computes anything; it only explains a fact sheet produced by the scoring code.
-- Every number in its output is checked against that fact sheet, allowing sensible rounding (48,213 → 48k, 0.42 → 42%). **One untraceable number and the narrative is discarded** in favour of a deterministic template.
-- The UI always says which one you're reading, e.g. "AI-written · 14 figures verified" or "Template · AI cited figures not in the data".
-- The **analyst chat** works the same way: it finds the areas, pincodes, properties and studies named in the question, computes their facts with the same scoring code, and only then lets the LLM phrase the answer.
-- The provider is swappable through `.env`: `LLM_PROVIDER=anthropic`, any OpenAI-compatible endpoint (OpenAI, Groq, OpenRouter, Ollama), or `none`. With `none`, which is the default, the app is fully functional with template narratives.
-- Scoring, hotspot ranking, survey splitting and reuse decisions deliberately never use AI, so they stay reproducible.
+How the AI is kept honest. The language model never calculates anything. It only explains numbers that the scoring code has already worked out.
+- Every number the model writes is checked against those facts. Rounding is fine (48,213 can become 48k, 0.42 can become 42%), but if even one number can't be traced back, the AI text is thrown away and a plain template is shown instead.
+- The page always tells you which one you're reading, e.g. "AI-written · 14 figures verified" or "Template".
+- The Analyst chat works the same way: it first works out which areas, pincodes, properties or studies you're asking about, calculates their facts with the same code, and only then lets the model phrase the answer.
+- The provider is set in `.env`: Anthropic, any OpenAI-compatible service (OpenAI, Groq, OpenRouter, Ollama), or none. With none, the default, everything still works using the templates.
+- I deliberately kept AI out of scoring, hotspot ranking, survey splitting and reuse decisions so those results are always reproducible.
 
 ## 7. Catchment studies
 
-- **Reuse.** Earlier survey cells count as covered if their study was completed within **180 days** or is still in progress. If **80% or more** of the new catchment is covered, no fieldwork is created and the new study inherits the results. Otherwise only the uncovered cells are surveyed. Both thresholds are configurable.
-- **Fair, non-overlapping split.** Road segments are weighted by length (walking effort), sorted by compass bearing around the centre, and cut into *k* contiguous wedges of equal lane-km. Wedges never overlap and each starts at the centre. The suggested *k* is one per available surveyor, assuming about 4 lane-km per day.
-- **Lane capture.** Households, housing type, perceived socio-economic class (SEC A–D), occupancy, kiranas, supermarkets, competitor brands, footfall, vehicle access — or *can't access*. Everything is one-thumb friendly.
-- **Weak network.** The assignment is cached on the phone. Drafts autosave after the first edit. Saved lanes go into a local outbox, which syncs on reconnect and every 30 s. The server uses the client UUID as an idempotency key, so a retried send is never double-counted.
-- **Roll-up.** When all sectors are done, or the manager closes the study at 60% or more coverage, the results are summarised:
-  - households, extrapolated to unsurveyed lanes by length;
-  - outlets and households per outlet;
-  - SEC and housing mix, competitor brands, footfall;
-  - **survey vs model** households.
+Reusing earlier surveys. A hexagon counts as already covered if a study that included it finished within the last 180 days or is still running. If at least 80% of a new catchment is covered, no new fieldwork is created and the study simply reuses the earlier results. Otherwise only the missing hexagons are surveyed. Both limits can be changed in the config.
 
-  The results are linked back to the area report, and the affected properties are re-evaluated.
+Splitting the work fairly. The streets in the catchment are weighted by length, since that's what takes time to walk. They're sorted by compass direction from the centre and cut into equal slices of total street length, like slices of a pie. The slices never overlap, and each one starts at the centre so nobody has a long walk to their first lane. By default there's one slice per available surveyor, assuming about 4 km of lanes per person per day.
 
-## 8. Tech choices and trade-offs
+What gets recorded on each lane: approximate number of households, the type of housing, a rough economic class (A to D), how occupied it looks, kirana and supermarket counts, competitor brands seen, how busy the street is, and vehicle access. If a lane can't be entered, the surveyor can mark it as inaccessible. Everything is designed for one-thumb use on a phone.
 
-| Choice | Why |
+Weak network. The assignment is saved on the phone, drafts save automatically once you start typing, and finished lanes wait in a local outbox until there's a connection. The server recognises each submission by a unique ID, so sending the same lane twice never counts it twice.
+
+When the survey is done (or the survey manager closes it at 60% coverage or more), the results are rolled up. The roll-up gives:
+- households, with unsurveyed lanes estimated from their length;
+- outlets and households per outlet;
+- the housing and economic mix, competitor brands and footfall;
+- how the survey compares with the model's estimate.
+
+These results are attached to the area report, and any affected properties are re-evaluated.
+
+## 8. Technology choices and trade-offs
+
+| Choice | Why I picked it |
 |---|---|
-| FastAPI + Pydantic, SQLAlchemy 2 | Typed validation and auto-generated OpenAPI docs; a simple job runner fits in-process. |
-| **SQLite + H3 + Shapely** instead of PostGIS | Every spatial query here is either "cells in a set" or "within a radius", which H3 rings plus a distance filter answer exactly. It also gives reviewers a one-command setup with no database server. Moving to PostGIS would mean swapping the queries in `services/features.py` for `ST_DWithin`. |
-| React + Vite + TypeScript, TanStack Query | Type-safe screens; polling and caching for background jobs. |
-| MapLibre GL + OpenFreeMap | Open-source WebGL maps with a keyless vector basemap, smooth with thousands of hexagons. |
-| Tailwind v4 | Brand colours (`#782B90`, `#FFF200`) as design tokens, mobile-first. |
+| FastAPI, Pydantic, SQLAlchemy 2 | Typed validation, automatic API docs, and a simple way to run background jobs in the same process. |
+| SQLite with H3 and Shapely, instead of PostGIS | Every location query here is either "these hexagons" or "within this distance", and H3 plus a distance check answers both exactly. It also means reviewers can run the project with one command and no database server. Moving to PostGIS later would mostly mean changing the queries in `services/features.py`. |
+| React, Vite, TypeScript, TanStack Query | Type-safe screens, plus caching and polling for the background jobs. |
+| MapLibre GL with OpenFreeMap tiles | Open-source maps with a free basemap that needs no API key, and it stays smooth with thousands of hexagons. |
+| Tailwind v4 | Savomart's purple (#782B90) and yellow (#FFF200) set up once as theme colours, with a mobile-first layout. |
 
-Other decisions:
-- **Rule-based percentile scoring, not machine learning.** There are no labelled outcomes (store P&L) yet, and managers need to see *why* a score is what it is. These pillars are the features to regress on once that data exists.
-- **Approximate pincode and locality boundaries.** Each area is the set of grid cells nearest to its pincode or locality centre (a discrete Voronoi split, capped by radius). This is labelled in the UI.
-- **Polling instead of websockets** for job progress, which is more robust on flaky mobile networks.
-- **Simple auth.** Seeded users, HMAC-signed tokens and a demo persona switcher, as the brief allows. Role checks are real and happen on the server.
+A few other decisions I made on purpose:
+- Scoring is rule-based and uses percentiles rather than machine learning. There's no store performance data to learn from yet, and a manager needs to see why a score is what it is. Once sales data exists, these same pillars are what I'd train on.
+- Pincode and locality boundaries are approximate: each one is the set of hexagons closest to its centre. The app says so.
+- Job progress uses polling rather than websockets, which copes better with patchy mobile networks.
+- Login is deliberately simple, as the brief allows: seeded demo users and a persona switcher. The role checks behind it are real.
 
-## 9. Known issues and next steps
+## 9. Known issues and what I'd do next
 
-- The rent benchmark is mock data. Next step: plug in real lease comparables.
-- Population is calibrated to a single 2011 total. Next step: calibrate per ward with newer estimates.
-- Pincode areas are Voronoi approximations. Next step: use the official OGD boundary GeoJSON.
-- There is no service worker yet. Assignments and drafts work offline, but the app itself needs one online load first.
-- Survey sectors are compass wedges. Very elongated catchments would split better along the street network itself.
-- The job runner is single-instance with no rate limiting; fine for a team, not for scale.
-- Catchments are straight-line radii. Next step: drive-time catchments via OSRM.
+- Rents are mock data. Next I'd plug in real lease comparables.
+- Population is calibrated to one 2011 total. I'd calibrate per ward with newer estimates.
+- Pincode areas are approximations. I'd switch to the official OGD boundary files.
+- There's no service worker yet, so the app needs to load once online before the offline features work.
+- Survey sectors are compass slices. Very long, narrow catchments would split better along the street network itself.
+- The job runner is a single process with no rate limiting. That's fine for a team, but it would need a proper queue at scale.
+- Catchments use straight-line distance. Drive-time catchments (via OSRM) would be more realistic.
 
-## 10. Tests and CI
+## 10. Tests
 
 ```bash
 cd backend && python -m pytest -q     # 14 tests
-cd frontend && npm run build          # type-check + production build
+cd frontend && npm run build          # type check + production build
 ```
 
-- **Unit tests** cover: scoring is monotonic and exactly the weighted sum of its pillars; the network sweet spot; AI grounding accepts roundings and rejects invented numbers; the survey split is a balanced, contiguous partition.
-- **The flow test** runs the full **M1 → M2 → M3 loop through the API** on a synthetic city. It checks:
-  - role enforcement and the background job;
-  - bad-pin rejection, data-quality warnings, idempotent resubmits and the 409 duplicate;
-  - pipeline rules;
-  - survey split and cross-surveyor write rejection;
-  - harmless offline re-sync and automatic roll-up;
-  - ground-truthed re-evaluation and full reuse.
-- **GitHub Actions** runs the tests, a full `bootstrap --fresh`, and the frontend build.
+The unit tests check that:
+- scores behave sensibly and always equal the weighted sum of the pillars;
+- the grounding check accepts rounding but rejects invented numbers;
+- the survey split covers every street exactly once, in balanced, connected slices.
 
-## 11. How AI tools were used
+A larger flow test runs the whole M1 → M2 → M3 loop through the API on a small synthetic city. It covers:
+- role checks and background jobs;
+- rejected pins, data warnings, safe resubmits and duplicate detection;
+- pipeline rules;
+- survey splitting and surveyors being blocked from other people's lanes;
+- offline re-sync, the automatic roll-up, re-evaluation with survey data, and full reuse of an earlier study.
 
-Built with **Claude Code** (Anthropic) in the Claude desktop app. The full transcript is in [`ai-sessions/`](ai-sessions/). It was used to:
-- probe the data sources;
-- design and implement the backend, frontend and tests;
-- click through every persona in a browser to find and fix bugs, for example an unbalanced survey split, a property ground-truthed by the wrong study, and a map sizing issue.
+GitHub Actions runs the tests, a full fresh bootstrap and the frontend build on every push.
 
-_TODO (author): add a line on how you directed and reviewed the work._
+## 11. Working with Claude
+
+I built this with Claude Code (Anthropic) in the Claude desktop app. I gave it the brief and directed the work through the conversation, and it wrote the code, ran it, and tested every persona's screens in a built-in browser. The full exported session is in [ai-sessions/](ai-sessions/).
+
+These were the main prompts I gave, in order, and what came out of each:
+
+| What I asked | What happened |
+|---|---|
+| "I want to do this whole project … the project should satisfy all the requirements." | Claude read the brief, tested the real data sources (the Stores API, Overpass, Nominatim and the OGD pincode API) and chose SQLite + H3 because Docker wasn't available. It then built the backend, frontend and tests for M1–M3, clicking through each flow in the browser and fixing the bugs it found along the way. |
+| "How to run this and see, before that check once everything works fine." | It cleared out stale dev servers, ran the tests and the type check, called every main API endpoint as each persona, and ran a fresh area analysis. |
+| "Make sure the readme is proper … it will be evaluated as well." | The README was rewritten for reviewers. Local tooling files were removed from the repo, and an unused setting that the README had described was deleted. |
+| "Did it complete every milestone? How to check?" | It mapped each line of M1–M3 to the screen where you can see it, and was upfront about what's approximate or synthetic. |
+| The organisers' correction to the Stores API command | The code was already calling the API with GET, so only the README needed a note. |
+| "Render or Vercel?" | Render: the app needs background jobs, a database file and uploaded photos, which Vercel's serverless functions can't keep. |
+| "In mobile view … values are out of the grid." | It checked every screen for all four personas at phone width with an automated overflow scan, then fixed the Compare page, the decision pack, the property form and the data tables. |
+| Update my git identity and make this README sound more natural | This version. |
+
+Along the way I checked the app myself, reported the mobile layout problems I spotted, and passed on the organisers' API correction.
 
 ## 12. Project layout
 
@@ -277,7 +278,7 @@ frontend/src/
   pages/          Explore · ReportDetail · Pipeline · PropertyDetail · NewProperty · StudyDetail · SurveyUnit · Assistant …
   components/     Map · Layout · Modals · PropertyFields · ui
   lib/            api · auth · offline (drafts, outbox, photo compression)
-ai-sessions/      AI session transcript
+ai-sessions/      exported Claude Code session
 ```
 
-_Windows note: if pip-installed SQLAlchemy is blocked by Smart App Control ("Application Control policy has blocked this file"), install its pure-Python wheel instead: `pip download sqlalchemy --only-binary=:all: --platform any --no-deps -d w && pip install --force-reinstall --no-deps w/*.whl`._
+A note for Windows: if Smart App Control blocks SQLAlchemy after installing ("An Application Control policy has blocked this file"), install its pure-Python version instead with `pip download sqlalchemy --only-binary=:all: --platform any --no-deps -d w && pip install --force-reinstall --no-deps w/*.whl`.

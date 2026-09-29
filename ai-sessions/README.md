@@ -1,12 +1,12 @@
 # AI sessions
 
-This project was built with **Claude Code** (Anthropic) running in the Claude desktop app.
+This project was built with Claude Code (Anthropic) in the Claude desktop app.
 
-* `claude-code-session-*.zip` — exported Claude Code session(s) (`transcript.jsonl` inside) of the build session(s): the prompts, the agent's reasoning summaries, every tool call (shell commands, file edits, browser checks) and their results.
+`claude-code-session-1.zip` is the exported session. Open `transcript.jsonl` inside it to see every prompt I gave, Claude's replies, and each tool call it made (shell commands, file edits, browser checks) along with the results.
 
-How the AI was used is summarised in the main README (§13). Highlights you'll find in the transcript:
+Section 11 of the main README summarises the conversation prompt by prompt. Some moments worth looking at in the transcript:
 
-* probing the real data sources before designing (Stores API needed GET not POST; Overpass mirrors returning 406/429/504; OGD API timing out → Nominatim fallback);
-* the SQLite + H3 decision (no Docker/Postgres on the build machine) and the Windows Application Control workaround for SQLAlchemy;
-* calibration passes on the scoring model after sanity-checking known neighbourhoods (T. Nagar, Velachery, Anna Nagar…);
-* bugs found by clicking through the UI in a browser and fixed (map container CSS, basemap API key watermark, unbalanced survey splits → segment-level wedges, ground truth picked from the wrong study, deal-breaker scores).
+- testing the real data sources before designing anything: the Stores API rejected POST, Overpass servers kept returning 429/504, and the OGD pincode API timed out, so pincodes fall back to Nominatim;
+- choosing SQLite + H3 because Docker and Postgres weren't available, and working around Windows blocking one of SQLAlchemy's compiled files;
+- sanity-checking scores for well-known areas (T. Nagar, Velachery, Anna Nagar) and adjusting the model;
+- bugs found by clicking through the app and fixed: the map not showing, a basemap that needed an API key, uneven survey splits, a property matched to the wrong survey, and mobile layouts spilling off the screen.
